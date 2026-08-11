@@ -17,7 +17,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
-      <div className="flag-rule" />
+      <div className="flag-rule-animated" />
       <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 py-3 sm:px-6">
         <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <img src={logo} alt="Youth Front of Kenya logo" width={40} height={40} className="h-10 w-10" />

@@ -45,7 +45,7 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="flag-rule" />
+      <div className="flag-rule-animated" />
       <div className="mx-auto max-w-7xl px-4 py-5 text-xs text-muted-foreground sm:px-6">
         © {new Date().getFullYear()} The Youth Front of Kenya. All rights reserved.
       </div>
