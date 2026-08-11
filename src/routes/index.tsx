@@ -1,24 +1,232 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Counter } from "@/components/site/Counter";
+import { impactStats, news, programs } from "@/lib/site-data";
+import heroImage from "@/assets/hero-youth.jpg";
+import civicImage from "@/assets/program-civic.jpg";
+import digitalImage from "@/assets/program-digital.jpg";
+import environmentImage from "@/assets/program-environment.jpg";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "The Youth Front of Kenya — Sauti ya Vijana; Haki Yetu, Nchi Yetu";
+const description =
+  "YFK is Kenya's youth movement for civic action, training and enterprise across all 47 counties. Join, volunteer, donate or explore our programs.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "NGO",
+          name: "The Youth Front of Kenya",
+          alternateName: "YFK",
+          slogan: "Sauti ya Vijana; Haki Yetu, Nchi Yetu",
+          areaServed: "Kenya",
+          url: "/",
+        }),
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const pillarImages = [
+  { src: civicImage, alt: "A young Kenyan speaking at a community town hall meeting", caption: "Civic action" },
+  { src: digitalImage, alt: "Young Kenyans learning digital skills on laptops", caption: "Digital skills" },
+  {
+    src: environmentImage,
+    alt: "Youth volunteers planting tree seedlings on a green hillside",
+    caption: "Climate action",
+  },
+];
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div>
+      <section className="relative isolate min-h-[92vh] overflow-hidden">
+        <img
+          src={heroImage}
+          alt="Young Kenyans marching with placards at sunset"
+          width={1920}
+          height={1088}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="hero-scrim absolute inset-0" />
+        <div className="relative mx-auto flex min-h-[92vh] max-w-7xl flex-col justify-end px-4 pb-16 pt-32 sm:px-6">
+          <p className="eyebrow animate-rise">Registered Public Benefit Organization · Kenya</p>
+          <h1 className="animate-rise mt-4 max-w-4xl text-[clamp(3rem,10vw,7.5rem)]">
+            The Youth Front of Kenya
+          </h1>
+          <p className="animate-rise mt-4 max-w-2xl text-lg font-semibold tracking-wide text-foreground/90 sm:text-2xl">
+            Sauti ya Vijana; Haki Yetu, Nchi Yetu.
+          </p>
+          <p className="mt-4 max-w-xl text-base text-muted-foreground">
+            A national movement organising young Kenyans in every ward for civic participation,
+            training, enterprise and accountable leadership.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              to="/get-involved"
+              className="inline-flex items-center rounded-sm bg-primary px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-primary-foreground transition-transform hover:-translate-y-0.5"
+            >
+              Join YFK
+            </Link>
+            <Link
+              to="/get-involved"
+              hash="donate"
+              className="inline-flex items-center rounded-sm bg-secondary px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-secondary-foreground transition-transform hover:-translate-y-0.5"
+            >
+              Donate
+            </Link>
+            <Link
+              to="/get-involved"
+              hash="volunteer"
+              className="inline-flex items-center rounded-sm border border-border bg-background/40 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] backdrop-blur transition-colors hover:bg-accent"
+            >
+              Volunteer
+            </Link>
+            <Link
+              to="/programs"
+              className="inline-flex items-center rounded-sm border border-border bg-background/40 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] backdrop-blur transition-colors hover:bg-accent"
+            >
+              Explore Programs
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-surface">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow">Live impact dashboard</p>
+              <h2 className="mt-2 text-4xl sm:text-5xl">Our movement in numbers</h2>
+            </div>
+            <p className="max-w-md text-sm text-muted-foreground">
+              Indicative figures from our national register. Counters will read directly from the
+              members and projects database once the member system goes live.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {impactStats.map((stat) => (
+              <Counter key={stat.label} value={stat.value} label={stat.label} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <p className="eyebrow">What we do</p>
+        <h2 className="mt-2 max-w-2xl text-4xl sm:text-5xl">
+          Six pillars, one movement, forty-seven counties
+        </h2>
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {programs.map((program) => (
+            <article
+              key={program.slug}
+              className="group flex flex-col border-t-2 border-secondary bg-card p-6 transition-colors hover:bg-accent"
+            >
+              <h3 className="text-2xl">{program.title}</h3>
+              <p className="mt-3 flex-1 text-sm text-muted-foreground">{program.summary}</p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {program.pillars.map((p) => (
+                  <li
+                    key={p}
+                    className="rounded-sm bg-muted px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+                  >
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+        <Link
+          to="/programs"
+          className="mt-8 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-primary"
+        >
+          All programs →
+        </Link>
+      </section>
+
+      <section className="border-y border-border bg-surface">
+        <div className="mx-auto grid max-w-7xl gap-1 px-4 py-4 sm:px-6 md:grid-cols-3">
+          {pillarImages.map((image) => (
+            <figure key={image.caption} className="relative overflow-hidden">
+              <img
+                src={image.src}
+                alt={image.alt}
+                width={1200}
+                height={900}
+                loading="lazy"
+                className="h-64 w-full object-cover grayscale-[35%] transition-all duration-500 hover:grayscale-0"
+              />
+              <figcaption className="absolute bottom-0 left-0 bg-flag-black/80 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em]">
+                {image.caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow">Newsroom</p>
+            <h2 className="mt-2 text-4xl sm:text-5xl">Latest from YFK</h2>
+          </div>
+          <Link
+            to="/news"
+            className="text-sm font-bold uppercase tracking-[0.14em] text-primary"
+          >
+            All news →
+          </Link>
+        </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {news.slice(0, 3).map((item) => (
+            <article key={item.slug} className="border-l-2 border-primary bg-card p-6">
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
+                {item.category} · {new Date(item.date).toLocaleDateString("en-KE", { dateStyle: "medium" })}
+              </p>
+              <h3 className="mt-3 text-xl">{item.title}</h3>
+              <p className="mt-3 text-sm text-muted-foreground">{item.excerpt}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-t border-border bg-flag-black">
+        <div className="mx-auto max-w-7xl px-4 py-20 text-center sm:px-6">
+          <h2 className="text-4xl sm:text-6xl">Stand with the front</h2>
+          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+            Whether you have five minutes or five years, there is a place for you in this movement.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link
+              to="/get-involved"
+              className="inline-flex items-center rounded-sm bg-primary px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-primary-foreground"
+            >
+              Become a member
+            </Link>
+            <Link
+              to="/counties"
+              className="inline-flex items-center rounded-sm border border-border px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] transition-colors hover:bg-accent"
+            >
+              Find your county
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
