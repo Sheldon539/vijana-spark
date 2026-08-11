@@ -21,54 +21,34 @@ export const Route = createFileRoute("/news")({
 });
 
 function NewsPage() {
-  const [lead, ...rest] = news;
-
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
       <p className="eyebrow">News & media centre</p>
-      <h1 className="mt-3 max-w-3xl text-5xl sm:text-7xl">Statements & stories</h1>
+      <h1 className="mt-3 text-4xl sm:text-5xl">Statements & stories</h1>
 
-      {lead && (
-        <article className="group mt-12 grid gap-0 overflow-hidden border-t-2 border-primary bg-card lg:grid-cols-2">
-          <img
-            src={lead.image}
-            alt={lead.imageAlt}
-            width={1280}
-            height={800}
-            className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105 lg:h-full"
-          />
-          <div className="p-8">
-            <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
-              {lead.category} ·{" "}
-              {new Date(lead.date).toLocaleDateString("en-KE", { dateStyle: "long" })}
-            </p>
-            <h2 className="mt-4 max-w-3xl text-4xl sm:text-5xl">{lead.title}</h2>
-            <p className="mt-4 max-w-2xl text-muted-foreground">{lead.excerpt}</p>
-          </div>
-        </article>
-      )}
-
-      <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {rest.map((item) => (
+      <div className="mt-10 divide-y divide-border border-t border-border">
+        {news.map((item) => (
           <article
             key={item.slug}
-            className="group overflow-hidden border-l-2 border-border bg-card"
+            className="group grid gap-4 py-5 sm:grid-cols-[auto_1fr] sm:items-start"
           >
             <img
               src={item.image}
               alt={item.imageAlt}
               loading="lazy"
-              width={1280}
-              height={800}
-              className="h-44 w-full object-cover grayscale-[30%] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+              width={120}
+              height={120}
+              className="h-24 w-24 shrink-0 rounded-sm object-cover grayscale-[30%] transition-all duration-500 group-hover:grayscale-0"
             />
-            <div className="p-6">
-              <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-secondary">
+            <div>
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
                 {item.category} ·{" "}
-                {new Date(item.date).toLocaleDateString("en-KE", { dateStyle: "medium" })}
+                {new Date(item.date).toLocaleDateString("en-KE", { dateStyle: "long" })}
               </p>
-              <h2 className="mt-3 text-2xl">{item.title}</h2>
-              <p className="mt-3 text-sm text-muted-foreground">{item.excerpt}</p>
+              <h2 className="mt-1 text-xl font-semibold leading-snug group-hover:text-primary sm:text-2xl">
+                {item.title}
+              </h2>
+              <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{item.excerpt}</p>
             </div>
           </article>
         ))}

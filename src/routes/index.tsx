@@ -212,7 +212,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+      <section className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
         <Reveal className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="eyebrow">Newsroom</p>
@@ -225,29 +225,29 @@ function Index() {
             All news →
           </Link>
         </Reveal>
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {news.slice(0, 3).map((item, i) => (
+        <div className="mt-10 divide-y divide-border border-t border-border">
+          {news.slice(0, 4).map((item) => (
             <Reveal
               key={item.slug}
               as="article"
-              delay={i * 120}
-              variant="left"
-              className="hover-lift group overflow-hidden border-l-2 border-primary bg-card"
+              className="group grid gap-4 py-5 sm:grid-cols-[auto_1fr] sm:items-start"
             >
               <img
                 src={item.image}
                 alt={item.imageAlt}
                 loading="lazy"
-                width={1280}
-                height={800}
-                className="h-44 w-full object-cover grayscale-[30%] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                width={96}
+                height={96}
+                className="h-20 w-20 shrink-0 rounded-sm object-cover grayscale-[30%] transition-all duration-500 group-hover:grayscale-0"
               />
-              <div className="p-6">
-              <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
-                {item.category} · {new Date(item.date).toLocaleDateString("en-KE", { dateStyle: "medium" })}
-              </p>
-              <h3 className="mt-3 text-xl">{item.title}</h3>
-              <p className="mt-3 text-sm text-muted-foreground">{item.excerpt}</p>
+              <div>
+                <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
+                  {item.category} · {new Date(item.date).toLocaleDateString("en-KE", { dateStyle: "medium" })}
+                </p>
+                <h3 className="mt-1 text-lg font-semibold leading-snug group-hover:text-primary sm:text-xl">
+                  {item.title}
+                </h3>
+                <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{item.excerpt}</p>
               </div>
             </Reveal>
           ))}
