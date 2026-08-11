@@ -29,25 +29,47 @@ function NewsPage() {
       <h1 className="mt-3 max-w-3xl text-5xl sm:text-7xl">Statements & stories</h1>
 
       {lead && (
-        <article className="mt-12 border-t-2 border-primary bg-card p-8">
-          <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
-            {lead.category} ·{" "}
-            {new Date(lead.date).toLocaleDateString("en-KE", { dateStyle: "long" })}
-          </p>
-          <h2 className="mt-4 max-w-3xl text-4xl sm:text-5xl">{lead.title}</h2>
-          <p className="mt-4 max-w-2xl text-muted-foreground">{lead.excerpt}</p>
+        <article className="group mt-12 grid gap-0 overflow-hidden border-t-2 border-primary bg-card lg:grid-cols-2">
+          <img
+            src={lead.image}
+            alt={lead.imageAlt}
+            width={1280}
+            height={800}
+            className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105 lg:h-full"
+          />
+          <div className="p-8">
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
+              {lead.category} ·{" "}
+              {new Date(lead.date).toLocaleDateString("en-KE", { dateStyle: "long" })}
+            </p>
+            <h2 className="mt-4 max-w-3xl text-4xl sm:text-5xl">{lead.title}</h2>
+            <p className="mt-4 max-w-2xl text-muted-foreground">{lead.excerpt}</p>
+          </div>
         </article>
       )}
 
       <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {rest.map((item) => (
-          <article key={item.slug} className="border-l-2 border-border bg-card p-6">
-            <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-secondary">
-              {item.category} ·{" "}
-              {new Date(item.date).toLocaleDateString("en-KE", { dateStyle: "medium" })}
-            </p>
-            <h2 className="mt-3 text-2xl">{item.title}</h2>
-            <p className="mt-3 text-sm text-muted-foreground">{item.excerpt}</p>
+          <article
+            key={item.slug}
+            className="group overflow-hidden border-l-2 border-border bg-card"
+          >
+            <img
+              src={item.image}
+              alt={item.imageAlt}
+              loading="lazy"
+              width={1280}
+              height={800}
+              className="h-44 w-full object-cover grayscale-[30%] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+            />
+            <div className="p-6">
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-secondary">
+                {item.category} ·{" "}
+                {new Date(item.date).toLocaleDateString("en-KE", { dateStyle: "medium" })}
+              </p>
+              <h2 className="mt-3 text-2xl">{item.title}</h2>
+              <p className="mt-3 text-sm text-muted-foreground">{item.excerpt}</p>
+            </div>
           </article>
         ))}
       </div>

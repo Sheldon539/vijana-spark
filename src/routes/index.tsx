@@ -232,13 +232,23 @@ function Index() {
               as="article"
               delay={i * 120}
               variant="left"
-              className="hover-lift border-l-2 border-primary bg-card p-6"
+              className="hover-lift group overflow-hidden border-l-2 border-primary bg-card"
             >
+              <img
+                src={item.image}
+                alt={item.imageAlt}
+                loading="lazy"
+                width={1280}
+                height={800}
+                className="h-44 w-full object-cover grayscale-[30%] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+              />
+              <div className="p-6">
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
                 {item.category} · {new Date(item.date).toLocaleDateString("en-KE", { dateStyle: "medium" })}
               </p>
               <h3 className="mt-3 text-xl">{item.title}</h3>
               <p className="mt-3 text-sm text-muted-foreground">{item.excerpt}</p>
+              </div>
             </Reveal>
           ))}
         </div>

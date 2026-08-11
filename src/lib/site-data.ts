@@ -58,6 +58,13 @@ export const programs = [
   },
 ] as const;
 
+import newsCoordinators from "@/assets/news-coordinators.jpg";
+import newsBudgetTracker from "@/assets/news-budget-tracker.jpg";
+import newsAiCohort from "@/assets/news-ai-cohort.jpg";
+import newsTrees from "@/assets/news-trees.jpg";
+import newsTransparency from "@/assets/news-transparency.jpg";
+import newsForum from "@/assets/news-forum.jpg";
+
 export const news = [
   {
     slug: "county-coordinators-inducted",
@@ -66,6 +73,9 @@ export const news = [
     title: "YFK inducts county coordinators across all 47 counties",
     excerpt:
       "The national secretariat completed a three-week induction covering governance, safeguarding and county reporting standards.",
+    image: newsCoordinators,
+    imageAlt:
+      "Newly inducted YFK county coordinators in branded shirts seated at a national induction workshop",
   },
   {
     slug: "budget-tracker-launch",
@@ -74,6 +84,9 @@ export const news = [
     title: "Youth-led county budget tracker enters pilot in six counties",
     excerpt:
       "Members will be able to follow development allocations from approval to delivery, ward by ward.",
+    image: newsBudgetTracker,
+    imageAlt:
+      "Young volunteers reviewing a county budget dashboard on a laptop in a community hall",
   },
   {
     slug: "ai-literacy-cohort",
@@ -82,6 +95,8 @@ export const news = [
     title: "First AI literacy cohort graduates 1,200 young Kenyans",
     excerpt:
       "Graduates completed 40 hours of applied training in data, prompting and digital work readiness.",
+    image: newsAiCohort,
+    imageAlt: "Graduates of the YFK AI literacy cohort holding certificates in a computer lab",
   },
   {
     slug: "tree-growing-milestone",
@@ -90,6 +105,8 @@ export const news = [
     title: "215,000 trees and counting: YFK marks World Environment Day",
     excerpt:
       "Chapters in 31 counties planted indigenous seedlings alongside schools and community forest associations.",
+    image: newsTrees,
+    imageAlt: "Youth volunteers and schoolchildren planting indigenous tree seedlings on a hillside",
   },
   {
     slug: "transparency-report",
@@ -98,6 +115,8 @@ export const news = [
     title: "YFK publishes half-year financial transparency brief",
     excerpt:
       "A summary of income, expenditure and programme spend, in line with our public accountability commitments.",
+    image: newsTransparency,
+    imageAlt: "Hands reviewing a printed financial transparency report with charts beside a laptop",
   },
   {
     slug: "youth-forum",
@@ -106,6 +125,8 @@ export const news = [
     title: "National Youth Forum returns with a focus on jobs and justice",
     excerpt:
       "Delegates from every region will debate employment, policing reform and devolution of youth funds.",
+    image: newsForum,
+    imageAlt: "Speaker addressing delegates with raised hands at the National Youth Forum",
   },
 ] as const;
 
