@@ -14,6 +14,189 @@ export type Database = {
   }
   public: {
     Tables: {
+      documents: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          doc_date: string | null
+          external_url: string | null
+          file_path: string | null
+          id: string
+          sort_order: number
+          status: string
+          title: string
+          updated_at: string
+          version: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          doc_date?: string | null
+          external_url?: string | null
+          file_path?: string | null
+          id?: string
+          sort_order?: number
+          status?: string
+          title: string
+          updated_at?: string
+          version?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          doc_date?: string | null
+          external_url?: string | null
+          file_path?: string | null
+          id?: string
+          sort_order?: number
+          status?: string
+          title?: string
+          updated_at?: string
+          version?: string | null
+        }
+        Relationships: []
+      }
+      donations: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          designation: string | null
+          donor_email: string | null
+          donor_name: string
+          donor_phone: string | null
+          id: string
+          is_anonymous: boolean
+          method: string
+          notes: string | null
+          organisation: string | null
+          reference: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency?: string
+          designation?: string | null
+          donor_email?: string | null
+          donor_name: string
+          donor_phone?: string | null
+          id?: string
+          is_anonymous?: boolean
+          method?: string
+          notes?: string | null
+          organisation?: string | null
+          reference?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          designation?: string | null
+          donor_email?: string | null
+          donor_name?: string
+          donor_phone?: string | null
+          id?: string
+          is_anonymous?: boolean
+          method?: string
+          notes?: string | null
+          organisation?: string | null
+          reference?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      enquiries: {
+        Row: {
+          created_at: string
+          email: string
+          enquiry_type: string
+          full_name: string
+          id: string
+          message: string
+          phone: string | null
+          status: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          enquiry_type?: string
+          full_name: string
+          id?: string
+          message: string
+          phone?: string | null
+          status?: string
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          enquiry_type?: string
+          full_name?: string
+          id?: string
+          message?: string
+          phone?: string | null
+          status?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      leaders: {
+        Row: {
+          bio: string | null
+          created_at: string
+          department: string | null
+          full_name: string
+          id: string
+          is_active: boolean
+          official_contact: string | null
+          organ: string
+          photo_url: string | null
+          position: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          department?: string | null
+          full_name: string
+          id?: string
+          is_active?: boolean
+          official_contact?: string | null
+          organ?: string
+          photo_url?: string | null
+          position: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          department?: string | null
+          full_name?: string
+          id?: string
+          is_active?: boolean
+          official_contact?: string | null
+          organ?: string
+          photo_url?: string | null
+          position?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       members: {
         Row: {
           county: string | null
@@ -62,6 +245,159 @@ export type Database = {
         }
         Relationships: []
       }
+      membership_applications: {
+        Row: {
+          admin_notes: string | null
+          age: number | null
+          comms_email: boolean
+          comms_sms: boolean
+          comms_whatsapp: boolean
+          consent: boolean
+          constituency: string | null
+          county: string
+          created_at: string
+          date_of_birth: string | null
+          email: string
+          full_name: string
+          id: string
+          membership_category: string
+          occupation: string | null
+          phone: string
+          status: string
+          updated_at: string
+          ward: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          age?: number | null
+          comms_email?: boolean
+          comms_sms?: boolean
+          comms_whatsapp?: boolean
+          consent?: boolean
+          constituency?: string | null
+          county: string
+          created_at?: string
+          date_of_birth?: string | null
+          email: string
+          full_name: string
+          id?: string
+          membership_category: string
+          occupation?: string | null
+          phone: string
+          status?: string
+          updated_at?: string
+          ward?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          age?: number | null
+          comms_email?: boolean
+          comms_sms?: boolean
+          comms_whatsapp?: boolean
+          consent?: boolean
+          constituency?: string | null
+          county?: string
+          created_at?: string
+          date_of_birth?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          membership_category?: string
+          occupation?: string | null
+          phone?: string
+          status?: string
+          updated_at?: string
+          ward?: string | null
+        }
+        Relationships: []
+      }
+      news_posts: {
+        Row: {
+          body: string | null
+          category: string
+          created_at: string
+          excerpt: string | null
+          id: string
+          image_alt: string | null
+          image_url: string | null
+          is_published: boolean
+          published_on: string
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          category?: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          image_alt?: string | null
+          image_url?: string | null
+          is_published?: boolean
+          published_on?: string
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          category?: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          image_alt?: string | null
+          image_url?: string | null
+          is_published?: boolean
+          published_on?: string
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      programmes: {
+        Row: {
+          body: string | null
+          counties_reached: number
+          created_at: string
+          id: string
+          is_published: boolean
+          pillars: string[]
+          slug: string
+          sort_order: number
+          summary: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          counties_reached?: number
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          pillars?: string[]
+          slug: string
+          sort_order?: number
+          summary?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          counties_reached?: number
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          pillars?: string[]
+          slug?: string
+          sort_order?: number
+          summary?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -80,6 +416,57 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      volunteer_applications: {
+        Row: {
+          admin_notes: string | null
+          availability: string | null
+          consent: boolean
+          county: string
+          created_at: string
+          email: string
+          experience: string | null
+          full_name: string
+          id: string
+          interest_area: string | null
+          phone: string
+          skills: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          availability?: string | null
+          consent?: boolean
+          county: string
+          created_at?: string
+          email: string
+          experience?: string | null
+          full_name: string
+          id?: string
+          interest_area?: string | null
+          phone: string
+          skills?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          availability?: string | null
+          consent?: boolean
+          county?: string
+          created_at?: string
+          email?: string
+          experience?: string | null
+          full_name?: string
+          id?: string
+          interest_area?: string | null
+          phone?: string
+          skills?: string | null
+          status?: string
+          updated_at?: string
         }
         Relationships: []
       }
