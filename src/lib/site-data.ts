@@ -1,4 +1,4 @@
-export const impactStats = [
+export const impactStats: { label: string; value: number; prefix?: string; suffix?: string }[] = [
   { label: "Members Joined", value: 1200, suffix: "+" },
   { label: "Active Volunteers", value: 80 },
   { label: "Counties Reached", value: 15 },
@@ -7,7 +7,7 @@ export const impactStats = [
   { label: "Young People Trained", value: 640 },
   { label: "Civic Forums Held", value: 26 },
   { label: "Tree Seedlings Planted", value: 4500 },
-] as const;
+];
 
 export const programs = [
   {
