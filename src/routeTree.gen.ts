@@ -15,9 +15,14 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CountiesRouteImport } from './routes/counties'
 import { Route as GetInvolvedRouteImport } from './routes/get-involved'
+import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProgramsRouteImport } from './routes/programs'
+import { Route as SupportRouteImport } from './routes/support'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated.portal'
+import { Route as GovernanceIndexRouteImport } from './routes/governance.index'
+import { Route as GovernanceSlugRouteImport } from './routes/governance.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -48,9 +53,19 @@ const GetInvolvedRoute = GetInvolvedRouteImport.update({
   path: '/get-involved',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GovernanceRoute = GovernanceRouteImport.update({
+  id: '/governance',
+  path: '/governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgramsRoute = ProgramsRouteImport.update({
@@ -58,10 +73,25 @@ const ProgramsRoute = ProgramsRouteImport.update({
   path: '/programs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedPortalRoute = AuthenticatedPortalRouteImport.update({
   id: '/portal',
   path: '/portal',
   getParentRoute: () => AuthenticatedRoute,
+} as any)
+const GovernanceIndexRoute = GovernanceIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GovernanceRoute,
+} as any)
+const GovernanceSlugRoute = GovernanceSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => GovernanceRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -70,9 +100,14 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/counties': typeof CountiesRoute
   '/get-involved': typeof GetInvolvedRoute
+  '/governance': typeof GovernanceRouteWithChildren
   '/news': typeof NewsRoute
+  '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
+  '/support': typeof SupportRoute
   '/portal': typeof AuthenticatedPortalRoute
+  '/governance/$slug': typeof GovernanceSlugRoute
+  '/governance/': typeof GovernanceIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -81,8 +116,12 @@ export interface FileRoutesByTo {
   '/counties': typeof CountiesRoute
   '/get-involved': typeof GetInvolvedRoute
   '/news': typeof NewsRoute
+  '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
+  '/support': typeof SupportRoute
   '/portal': typeof AuthenticatedPortalRoute
+  '/governance/$slug': typeof GovernanceSlugRoute
+  '/governance': typeof GovernanceIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -92,9 +131,14 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/counties': typeof CountiesRoute
   '/get-involved': typeof GetInvolvedRoute
+  '/governance': typeof GovernanceRouteWithChildren
   '/news': typeof NewsRoute
+  '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
+  '/support': typeof SupportRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
+  '/governance/$slug': typeof GovernanceSlugRoute
+  '/governance/': typeof GovernanceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -104,9 +148,14 @@ export interface FileRouteTypes {
     | '/auth'
     | '/counties'
     | '/get-involved'
+    | '/governance'
     | '/news'
+    | '/privacy'
     | '/programs'
+    | '/support'
     | '/portal'
+    | '/governance/$slug'
+    | '/governance/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -115,8 +164,12 @@ export interface FileRouteTypes {
     | '/counties'
     | '/get-involved'
     | '/news'
+    | '/privacy'
     | '/programs'
+    | '/support'
     | '/portal'
+    | '/governance/$slug'
+    | '/governance'
   id:
     | '__root__'
     | '/'
@@ -125,9 +178,14 @@ export interface FileRouteTypes {
     | '/auth'
     | '/counties'
     | '/get-involved'
+    | '/governance'
     | '/news'
+    | '/privacy'
     | '/programs'
+    | '/support'
     | '/_authenticated/portal'
+    | '/governance/$slug'
+    | '/governance/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -137,8 +195,11 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   CountiesRoute: typeof CountiesRoute
   GetInvolvedRoute: typeof GetInvolvedRoute
+  GovernanceRoute: typeof GovernanceRouteWithChildren
   NewsRoute: typeof NewsRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProgramsRoute: typeof ProgramsRoute
+  SupportRoute: typeof SupportRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -185,11 +246,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GetInvolvedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/governance': {
+      id: '/governance'
+      path: '/governance'
+      fullPath: '/governance'
+      preLoaderRoute: typeof GovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/news': {
       id: '/news'
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programs': {
@@ -199,12 +274,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgramsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/portal': {
       id: '/_authenticated/portal'
       path: '/portal'
       fullPath: '/portal'
       preLoaderRoute: typeof AuthenticatedPortalRouteImport
       parentRoute: typeof AuthenticatedRoute
+    }
+    '/governance/': {
+      id: '/governance/'
+      path: '/'
+      fullPath: '/governance/'
+      preLoaderRoute: typeof GovernanceIndexRouteImport
+      parentRoute: typeof GovernanceRoute
+    }
+    '/governance/$slug': {
+      id: '/governance/$slug'
+      path: '/$slug'
+      fullPath: '/governance/$slug'
+      preLoaderRoute: typeof GovernanceSlugRouteImport
+      parentRoute: typeof GovernanceRoute
     }
   }
 }
@@ -221,6 +317,20 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
   AuthenticatedRouteChildren,
 )
 
+interface GovernanceRouteChildren {
+  GovernanceSlugRoute: typeof GovernanceSlugRoute
+  GovernanceIndexRoute: typeof GovernanceIndexRoute
+}
+
+const GovernanceRouteChildren: GovernanceRouteChildren = {
+  GovernanceSlugRoute: GovernanceSlugRoute,
+  GovernanceIndexRoute: GovernanceIndexRoute,
+}
+
+const GovernanceRouteWithChildren = GovernanceRoute._addFileChildren(
+  GovernanceRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
@@ -228,8 +338,11 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   CountiesRoute: CountiesRoute,
   GetInvolvedRoute: GetInvolvedRoute,
+  GovernanceRoute: GovernanceRouteWithChildren,
   NewsRoute: NewsRoute,
+  PrivacyRoute: PrivacyRoute,
   ProgramsRoute: ProgramsRoute,
+  SupportRoute: SupportRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
