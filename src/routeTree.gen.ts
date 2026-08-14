@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CountiesRouteImport } from './routes/counties'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as GetInvolvedRouteImport } from './routes/get-involved'
@@ -43,6 +44,11 @@ const AboutRoute = AboutRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CountiesRoute = CountiesRouteImport.update({
@@ -110,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/counties': typeof CountiesRoute
   '/documents': typeof DocumentsRoute
   '/get-involved': typeof GetInvolvedRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/counties': typeof CountiesRoute
   '/documents': typeof DocumentsRoute
   '/get-involved': typeof GetInvolvedRoute
@@ -145,6 +153,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/counties': typeof CountiesRoute
   '/documents': typeof DocumentsRoute
   '/get-involved': typeof GetInvolvedRoute
@@ -164,6 +173,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/auth'
+    | '/contact'
     | '/counties'
     | '/documents'
     | '/get-involved'
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/auth'
+    | '/contact'
     | '/counties'
     | '/documents'
     | '/get-involved'
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/about'
     | '/auth'
+    | '/contact'
     | '/counties'
     | '/documents'
     | '/get-involved'
@@ -217,6 +229,7 @@ export interface RootRouteChildren {
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
+  ContactRoute: typeof ContactRoute
   CountiesRoute: typeof CountiesRoute
   DocumentsRoute: typeof DocumentsRoute
   GetInvolvedRoute: typeof GetInvolvedRoute
@@ -256,6 +269,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/counties': {
@@ -376,6 +396,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
+  ContactRoute: ContactRoute,
   CountiesRoute: CountiesRoute,
   DocumentsRoute: DocumentsRoute,
   GetInvolvedRoute: GetInvolvedRoute,
