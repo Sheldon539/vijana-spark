@@ -5,10 +5,14 @@ import { useAuth } from "@/hooks/useAuth";
 
 const nav = [
   { to: "/about", label: "About" },
+  { to: "/governance", label: "Governance" },
   { to: "/programs", label: "Programs" },
   { to: "/counties", label: "Counties" },
   { to: "/news", label: "News" },
+  { to: "/documents", label: "Documents" },
+  { to: "/leadership", label: "Leadership" },
   { to: "/get-involved", label: "Get Involved" },
+  { to: "/contact", label: "Contact" },
 ] as const;
 
 export function Header() {
@@ -29,12 +33,12 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-1 md:flex">
+        <nav className="ml-auto hidden items-center gap-0.5 lg:flex">
           {nav.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="rounded-sm px-3 py-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+              className="rounded-sm px-2 py-2 text-[0.78rem] font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
               activeProps={{ className: "text-foreground" }}
             >
               {item.label}
@@ -43,7 +47,7 @@ export function Header() {
           {session ? (
             <Link
               to="/portal"
-              className="ml-2 inline-flex items-center rounded-sm bg-primary px-4 py-2 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:-translate-y-0.5"
+              className="ml-2 inline-flex items-center rounded-sm bg-primary px-4 py-2 text-[0.78rem] font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:-translate-y-0.5"
             >
               My Portal
             </Link>
@@ -51,13 +55,13 @@ export function Header() {
             <>
               <Link
                 to="/auth"
-                className="rounded-sm px-3 py-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+                className="rounded-sm px-2 py-2 text-[0.78rem] font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
               >
                 Sign In
               </Link>
               <Link
-                to="/auth"
-                className="ml-2 inline-flex items-center rounded-sm bg-primary px-4 py-2 text-sm font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:-translate-y-0.5"
+                to="/join"
+                className="ml-2 inline-flex items-center rounded-sm bg-primary px-4 py-2 text-[0.78rem] font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:-translate-y-0.5"
               >
                 Join YFK
               </Link>
@@ -70,7 +74,7 @@ export function Header() {
           aria-expanded={open}
           aria-label="Toggle navigation"
           onClick={() => setOpen((v) => !v)}
-          className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border md:hidden"
+          className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border lg:hidden"
         >
           <span className="sr-only">Menu</span>
           <span aria-hidden className="text-lg">
@@ -80,7 +84,7 @@ export function Header() {
       </div>
 
       {open && (
-        <nav className="border-t border-border px-4 pb-4 md:hidden">
+        <nav className="border-t border-border px-4 pb-4 lg:hidden">
           {nav.map((item) => (
             <Link
               key={item.to}
@@ -92,7 +96,7 @@ export function Header() {
             </Link>
           ))}
           <Link
-            to={session ? "/portal" : "/auth"}
+            to={session ? "/portal" : "/join"}
             onClick={() => setOpen(false)}
             className="mt-4 block bg-primary px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-primary-foreground"
           >
