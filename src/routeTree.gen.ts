@@ -13,13 +13,18 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CountiesRouteImport } from './routes/counties'
+import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as GetInvolvedRouteImport } from './routes/get-involved'
 import { Route as GovernanceRouteImport } from './routes/governance'
+import { Route as JoinRouteImport } from './routes/join'
+import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as SupportRouteImport } from './routes/support'
+import { Route as VolunteerRouteImport } from './routes/volunteer'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated.portal'
 import { Route as GovernanceIndexRouteImport } from './routes/governance.index'
 import { Route as GovernanceSlugRouteImport } from './routes/governance.$slug'
@@ -43,9 +48,19 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CountiesRoute = CountiesRouteImport.update({
   id: '/counties',
   path: '/counties',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GetInvolvedRoute = GetInvolvedRouteImport.update({
@@ -56,6 +71,16 @@ const GetInvolvedRoute = GetInvolvedRouteImport.update({
 const GovernanceRoute = GovernanceRouteImport.update({
   id: '/governance',
   path: '/governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JoinRoute = JoinRouteImport.update({
+  id: '/join',
+  path: '/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadershipRoute = LeadershipRouteImport.update({
+  id: '/leadership',
+  path: '/leadership',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsRoute = NewsRouteImport.update({
@@ -78,6 +103,11 @@ const SupportRoute = SupportRouteImport.update({
   path: '/support',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VolunteerRoute = VolunteerRouteImport.update({
+  id: '/volunteer',
+  path: '/volunteer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedPortalRoute = AuthenticatedPortalRouteImport.update({
   id: '/portal',
   path: '/portal',
@@ -98,13 +128,18 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/counties': typeof CountiesRoute
+  '/documents': typeof DocumentsRoute
   '/get-involved': typeof GetInvolvedRoute
   '/governance': typeof GovernanceRouteWithChildren
+  '/join': typeof JoinRoute
+  '/leadership': typeof LeadershipRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/support': typeof SupportRoute
+  '/volunteer': typeof VolunteerRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/governance/': typeof GovernanceIndexRoute
@@ -113,12 +148,17 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/counties': typeof CountiesRoute
+  '/documents': typeof DocumentsRoute
   '/get-involved': typeof GetInvolvedRoute
+  '/join': typeof JoinRoute
+  '/leadership': typeof LeadershipRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/support': typeof SupportRoute
+  '/volunteer': typeof VolunteerRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/governance': typeof GovernanceIndexRoute
@@ -129,13 +169,18 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/counties': typeof CountiesRoute
+  '/documents': typeof DocumentsRoute
   '/get-involved': typeof GetInvolvedRoute
   '/governance': typeof GovernanceRouteWithChildren
+  '/join': typeof JoinRoute
+  '/leadership': typeof LeadershipRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/support': typeof SupportRoute
+  '/volunteer': typeof VolunteerRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/governance/': typeof GovernanceIndexRoute
@@ -146,13 +191,18 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/auth'
+    | '/contact'
     | '/counties'
+    | '/documents'
     | '/get-involved'
     | '/governance'
+    | '/join'
+    | '/leadership'
     | '/news'
     | '/privacy'
     | '/programs'
     | '/support'
+    | '/volunteer'
     | '/portal'
     | '/governance/$slug'
     | '/governance/'
@@ -161,12 +211,17 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/auth'
+    | '/contact'
     | '/counties'
+    | '/documents'
     | '/get-involved'
+    | '/join'
+    | '/leadership'
     | '/news'
     | '/privacy'
     | '/programs'
     | '/support'
+    | '/volunteer'
     | '/portal'
     | '/governance/$slug'
     | '/governance'
@@ -176,13 +231,18 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/about'
     | '/auth'
+    | '/contact'
     | '/counties'
+    | '/documents'
     | '/get-involved'
     | '/governance'
+    | '/join'
+    | '/leadership'
     | '/news'
     | '/privacy'
     | '/programs'
     | '/support'
+    | '/volunteer'
     | '/_authenticated/portal'
     | '/governance/$slug'
     | '/governance/'
@@ -193,13 +253,18 @@ export interface RootRouteChildren {
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
+  ContactRoute: typeof ContactRoute
   CountiesRoute: typeof CountiesRoute
+  DocumentsRoute: typeof DocumentsRoute
   GetInvolvedRoute: typeof GetInvolvedRoute
   GovernanceRoute: typeof GovernanceRouteWithChildren
+  JoinRoute: typeof JoinRoute
+  LeadershipRoute: typeof LeadershipRoute
   NewsRoute: typeof NewsRoute
   PrivacyRoute: typeof PrivacyRoute
   ProgramsRoute: typeof ProgramsRoute
   SupportRoute: typeof SupportRoute
+  VolunteerRoute: typeof VolunteerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -232,11 +297,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/counties': {
       id: '/counties'
       path: '/counties'
       fullPath: '/counties'
       preLoaderRoute: typeof CountiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/get-involved': {
@@ -251,6 +330,20 @@ declare module '@tanstack/react-router' {
       path: '/governance'
       fullPath: '/governance'
       preLoaderRoute: typeof GovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/join': {
+      id: '/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof JoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leadership': {
+      id: '/leadership'
+      path: '/leadership'
+      fullPath: '/leadership'
+      preLoaderRoute: typeof LeadershipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news': {
@@ -279,6 +372,13 @@ declare module '@tanstack/react-router' {
       path: '/support'
       fullPath: '/support'
       preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/volunteer': {
+      id: '/volunteer'
+      path: '/volunteer'
+      fullPath: '/volunteer'
+      preLoaderRoute: typeof VolunteerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/portal': {
@@ -336,13 +436,18 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
+  ContactRoute: ContactRoute,
   CountiesRoute: CountiesRoute,
+  DocumentsRoute: DocumentsRoute,
   GetInvolvedRoute: GetInvolvedRoute,
   GovernanceRoute: GovernanceRouteWithChildren,
+  JoinRoute: JoinRoute,
+  LeadershipRoute: LeadershipRoute,
   NewsRoute: NewsRoute,
   PrivacyRoute: PrivacyRoute,
   ProgramsRoute: ProgramsRoute,
   SupportRoute: SupportRoute,
+  VolunteerRoute: VolunteerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
