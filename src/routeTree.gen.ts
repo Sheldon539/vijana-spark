@@ -23,6 +23,7 @@ import { Route as NewsRouteImport } from './routes/news'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as SupportRouteImport } from './routes/support'
+import { Route as VolunteerRouteImport } from './routes/volunteer'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated.portal'
 import { Route as GovernanceIndexRouteImport } from './routes/governance.index'
 import { Route as GovernanceSlugRouteImport } from './routes/governance.$slug'
@@ -96,6 +97,11 @@ const SupportRoute = SupportRouteImport.update({
   path: '/support',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VolunteerRoute = VolunteerRouteImport.update({
+  id: '/volunteer',
+  path: '/volunteer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedPortalRoute = AuthenticatedPortalRouteImport.update({
   id: '/portal',
   path: '/portal',
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/support': typeof SupportRoute
+  '/volunteer': typeof VolunteerRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/governance/': typeof GovernanceIndexRoute
@@ -143,6 +150,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/support': typeof SupportRoute
+  '/volunteer': typeof VolunteerRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/governance': typeof GovernanceIndexRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/support': typeof SupportRoute
+  '/volunteer': typeof VolunteerRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/governance/': typeof GovernanceIndexRoute
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/programs'
     | '/support'
+    | '/volunteer'
     | '/portal'
     | '/governance/$slug'
     | '/governance/'
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/programs'
     | '/support'
+    | '/volunteer'
     | '/portal'
     | '/governance/$slug'
     | '/governance'
@@ -219,6 +230,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/programs'
     | '/support'
+    | '/volunteer'
     | '/_authenticated/portal'
     | '/governance/$slug'
     | '/governance/'
@@ -239,6 +251,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ProgramsRoute: typeof ProgramsRoute
   SupportRoute: typeof SupportRoute
+  VolunteerRoute: typeof VolunteerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -341,6 +354,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SupportRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/volunteer': {
+      id: '/volunteer'
+      path: '/volunteer'
+      fullPath: '/volunteer'
+      preLoaderRoute: typeof VolunteerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/portal': {
       id: '/_authenticated/portal'
       path: '/portal'
@@ -406,6 +426,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ProgramsRoute: ProgramsRoute,
   SupportRoute: SupportRoute,
+  VolunteerRoute: VolunteerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
