@@ -18,6 +18,7 @@ import { Route as CountiesRouteImport } from './routes/counties'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as GetInvolvedRouteImport } from './routes/get-involved'
 import { Route as GovernanceRouteImport } from './routes/governance'
+import { Route as JoinRouteImport } from './routes/join'
 import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -70,6 +71,11 @@ const GetInvolvedRoute = GetInvolvedRouteImport.update({
 const GovernanceRoute = GovernanceRouteImport.update({
   id: '/governance',
   path: '/governance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JoinRoute = JoinRouteImport.update({
+  id: '/join',
+  path: '/join',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LeadershipRoute = LeadershipRouteImport.update({
@@ -127,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/documents': typeof DocumentsRoute
   '/get-involved': typeof GetInvolvedRoute
   '/governance': typeof GovernanceRouteWithChildren
+  '/join': typeof JoinRoute
   '/leadership': typeof LeadershipRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/counties': typeof CountiesRoute
   '/documents': typeof DocumentsRoute
   '/get-involved': typeof GetInvolvedRoute
+  '/join': typeof JoinRoute
   '/leadership': typeof LeadershipRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
@@ -166,6 +174,7 @@ export interface FileRoutesById {
   '/documents': typeof DocumentsRoute
   '/get-involved': typeof GetInvolvedRoute
   '/governance': typeof GovernanceRouteWithChildren
+  '/join': typeof JoinRoute
   '/leadership': typeof LeadershipRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
@@ -187,6 +196,7 @@ export interface FileRouteTypes {
     | '/documents'
     | '/get-involved'
     | '/governance'
+    | '/join'
     | '/leadership'
     | '/news'
     | '/privacy'
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/counties'
     | '/documents'
     | '/get-involved'
+    | '/join'
     | '/leadership'
     | '/news'
     | '/privacy'
@@ -225,6 +236,7 @@ export interface FileRouteTypes {
     | '/documents'
     | '/get-involved'
     | '/governance'
+    | '/join'
     | '/leadership'
     | '/news'
     | '/privacy'
@@ -246,6 +258,7 @@ export interface RootRouteChildren {
   DocumentsRoute: typeof DocumentsRoute
   GetInvolvedRoute: typeof GetInvolvedRoute
   GovernanceRoute: typeof GovernanceRouteWithChildren
+  JoinRoute: typeof JoinRoute
   LeadershipRoute: typeof LeadershipRoute
   NewsRoute: typeof NewsRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -317,6 +330,13 @@ declare module '@tanstack/react-router' {
       path: '/governance'
       fullPath: '/governance'
       preLoaderRoute: typeof GovernanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/join': {
+      id: '/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof JoinRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/leadership': {
@@ -421,6 +441,7 @@ const rootRouteChildren: RootRouteChildren = {
   DocumentsRoute: DocumentsRoute,
   GetInvolvedRoute: GetInvolvedRoute,
   GovernanceRoute: GovernanceRouteWithChildren,
+  JoinRoute: JoinRoute,
   LeadershipRoute: LeadershipRoute,
   NewsRoute: NewsRoute,
   PrivacyRoute: PrivacyRoute,
