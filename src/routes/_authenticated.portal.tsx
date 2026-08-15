@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -106,6 +106,13 @@ function PortalPage() {
             Karibu{member?.full_name ? `, ${member.full_name.split(" ")[0]}` : ""}
           </h1>
         </div>
+        <div className="flex gap-3">
+        <Link
+          to="/admin"
+          className="border border-border px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] transition-colors hover:bg-accent"
+        >
+          Administration
+        </Link>
         <button
           type="button"
           onClick={() => signOut()}
@@ -113,6 +120,7 @@ function PortalPage() {
         >
           Sign out
         </button>
+        </div>
       </div>
 
       {memberQuery.isLoading && (
