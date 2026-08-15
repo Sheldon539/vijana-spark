@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { programs } from "@/lib/site-data";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { programs as fallbackPrograms } from "@/lib/site-data";
 import civicImage from "@/assets/program-civic.jpg";
 import digitalImage from "@/assets/program-digital.jpg";
 import environmentImage from "@/assets/program-environment.jpg";
@@ -30,6 +32,29 @@ const imageBySlug: Record<string, { src: string; alt: string }> = {
 };
 
 function ProgramsPage() {
+  const { data } = useQuery({
+    queryKey: ["programmes"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("programmes")
+        .select("slug,title,summary,pillars,counties_reached")
+        .eq("is_published", true)
+        .order("sort_order", { ascending: true });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+
+  const programs =
+    data && data.length > 0
+      ? data.map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          summary: p.summary ?? "",
+          pillars: (p.pillars ?? []) as string[],
+        }))
+      : fallbackPrograms.map((p) => ({ ...p, pillars: [...p.pillars] as string[] }));
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
       <p className="eyebrow">Programs</p>
