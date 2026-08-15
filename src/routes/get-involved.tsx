@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 
 const title = "Get Involved — Join, Volunteer or Donate to YFK";
 const description =
@@ -46,9 +46,29 @@ function GetInvolvedPage() {
       <p className="eyebrow">Get involved</p>
       <h1 className="mt-3 max-w-3xl text-5xl sm:text-7xl">Three ways in</h1>
       <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-        Membership registration, volunteer placement and online giving open with the next release of
-        the platform. Until then, reach the secretariat and we will place you in your county chapter.
+        Register as a member, apply to volunteer in your ward, or support the movement. Around 1,200
+        members and 80 active volunteers have joined so far across 15 counties.
       </p>
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Link
+          to="/join"
+          className="sheen-on-hover rounded-sm bg-primary px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-primary-foreground"
+        >
+          Join YFK
+        </Link>
+        <Link
+          to="/volunteer"
+          className="rounded-sm border border-border px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] hover:bg-accent"
+        >
+          Volunteer
+        </Link>
+        <Link
+          to="/support"
+          className="rounded-sm border border-border px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] hover:bg-accent"
+        >
+          Support YFK
+        </Link>
+      </div>
 
       <section id="join" className="mt-16 scroll-mt-24">
         <h2 className="text-4xl">Become a member</h2>
@@ -64,9 +84,12 @@ function GetInvolvedPage() {
             </div>
           ))}
         </div>
-        <p className="mt-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-          Register at members@youthfrontkenya.org
-        </p>
+        <Link
+          to="/join"
+          className="mt-6 inline-block rounded-sm bg-primary px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground"
+        >
+          Open the membership form
+        </Link>
       </section>
 
       <section id="volunteer" className="mt-16 scroll-mt-24">
@@ -83,14 +106,21 @@ function GetInvolvedPage() {
             </div>
           ))}
         </div>
+        <Link
+          to="/volunteer"
+          className="mt-6 inline-block rounded-sm border border-border px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] hover:bg-accent"
+        >
+          Apply to volunteer
+        </Link>
       </section>
 
       <section id="donate" className="mt-16 scroll-mt-24 border border-border bg-surface p-8">
-        <h2 className="text-4xl">Donate</h2>
+        <h2 className="text-4xl">Support YFK</h2>
         <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
-          YFK is funded by small contributions from many young Kenyans. Every campaign publishes its
-          target, spend and outcome. M-Pesa, card and bank giving will be built into the platform,
-          with automatic receipts.
+          YFK is funded by small contributions from many young Kenyans, and KES 450,000 has been
+          contributed to date. Contributions are received only through official YFK accounts, never
+          through personal mobile money numbers. Online giving through a licensed provider is being
+          built; in the meantime the Secretariat issues official details and receipts in writing.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {givingTiers.map(([amount, text]) => (
@@ -101,16 +131,23 @@ function GetInvolvedPage() {
           ))}
         </div>
 
+        <Link
+          to="/support"
+          className="mt-6 inline-block rounded-sm bg-primary px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground"
+        >
+          How to support YFK
+        </Link>
+
         <div className="mt-8 max-w-md">
           <div className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
             <span>Youth Skills Fund 2026</span>
-            <span>62%</span>
+            <span>45%</span>
           </div>
           <div className="mt-2 h-3 w-full overflow-hidden rounded-sm bg-muted">
-            <div className="h-full w-[62%] bg-secondary" />
+            <div className="h-full w-[45%] bg-secondary" />
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            KES 6.2M raised of a KES 10M target
+            KES 450,000 raised of a KES 1,000,000 target
           </p>
         </div>
       </section>

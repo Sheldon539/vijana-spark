@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { news } from "@/lib/site-data";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { news as fallbackNews } from "@/lib/site-data";
 
 const title = "News & Media Centre — The Youth Front of Kenya";
 const description =
@@ -21,25 +23,55 @@ export const Route = createFileRoute("/news")({
 });
 
 function NewsPage() {
+  const { data } = useQuery({
+    queryKey: ["news"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("news_posts")
+        .select("slug,title,category,excerpt,image_url,image_alt,published_on")
+        .eq("is_published", true)
+        .order("published_on", { ascending: false });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+
+  const items =
+    data && data.length > 0
+      ? data.map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          category: p.category,
+          excerpt: p.excerpt ?? "",
+          date: p.published_on,
+          image: p.image_url ?? "",
+          imageAlt: p.image_alt ?? "",
+        }))
+      : fallbackNews.map((n) => ({ ...n }));
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
       <p className="eyebrow">News & media centre</p>
       <h1 className="mt-3 text-4xl sm:text-5xl">Statements & stories</h1>
 
       <div className="mt-10 divide-y divide-border border-t border-border">
-        {news.map((item) => (
+        {items.map((item) => (
           <article
             key={item.slug}
             className="group grid gap-4 py-5 sm:grid-cols-[auto_1fr] sm:items-start"
           >
-            <img
-              src={item.image}
-              alt={item.imageAlt}
-              loading="lazy"
-              width={120}
-              height={120}
-              className="h-24 w-24 shrink-0 rounded-sm object-cover grayscale-[30%] transition-all duration-500 group-hover:grayscale-0"
-            />
+            {item.image ? (
+              <img
+                src={item.image}
+                alt={item.imageAlt}
+                loading="lazy"
+                width={120}
+                height={120}
+                className="h-24 w-24 shrink-0 rounded-sm object-cover grayscale-[30%] transition-all duration-500 group-hover:grayscale-0"
+              />
+            ) : (
+              <div aria-hidden className="hidden h-24 w-24 shrink-0 rounded-sm bg-muted sm:block" />
+            )}
             <div>
               <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary">
                 {item.category} ·{" "}

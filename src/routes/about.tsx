@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { identity, org } from "@/lib/org";
 
 const title = "About YFK — Vision, Governance & Transparency";
 const description =
@@ -51,12 +52,21 @@ function AboutPage() {
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
       <p className="eyebrow">About the movement</p>
       <h1 className="mt-3 max-w-3xl text-5xl sm:text-7xl">A generation organising itself</h1>
-      <p className="mt-6 max-w-3xl text-lg text-muted-foreground">
-        The Youth Front of Kenya was founded by young organisers who were tired of being invited to
-        the table only at election time. Registered as a Public Benefit Organization, YFK builds
-        permanent youth structures in every county so that young Kenyans hold power between
-        elections, not just during them.
-      </p>
+      <p className="mt-6 max-w-3xl text-lg text-muted-foreground">{identity.who}</p>
+
+      <section className="mt-14 grid gap-4 md:grid-cols-2">
+        {[
+          ["Why we exist", identity.why],
+          ["What we do", identity.what],
+          ["What we stand for", identity.stands],
+          ["Where we operate", identity.where],
+        ].map(([heading, body]) => (
+          <div key={heading} className="border-l-2 border-border bg-card p-6">
+            <h2 className="text-2xl">{heading}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">{body}</p>
+          </div>
+        ))}
+      </section>
 
       <div className="mt-14 grid gap-4 md:grid-cols-2">
         <div className="border-t-2 border-primary bg-card p-8">
@@ -120,8 +130,28 @@ function AboutPage() {
           financial statements, donor disclosures and programme evaluations. Our constitution,
           safeguarding policy and complaints procedure will be downloadable here.
         </p>
-        <p className="mt-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-          Document library coming with the members portal
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            to="/governance"
+            className="rounded-sm bg-primary px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground"
+          >
+            Governance
+          </Link>
+          <Link
+            to="/documents"
+            className="rounded-sm border border-border px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] hover:bg-accent"
+          >
+            Document Centre
+          </Link>
+          <Link
+            to="/leadership"
+            className="rounded-sm border border-border px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] hover:bg-accent"
+          >
+            Leadership Directory
+          </Link>
+        </div>
+        <p className="mt-6 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+          {org.status} · Enquiries: {org.email}
         </p>
       </section>
     </div>
