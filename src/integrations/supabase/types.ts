@@ -356,6 +356,57 @@ export type Database = {
         }
         Relationships: []
       }
+      programme_enrolments: {
+        Row: {
+          admin_notes: string | null
+          age: number | null
+          consent: boolean
+          county: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          motivation: string | null
+          phone: string
+          programme_slug: string
+          programme_title: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          age?: number | null
+          consent?: boolean
+          county: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          motivation?: string | null
+          phone: string
+          programme_slug: string
+          programme_title: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          age?: number | null
+          consent?: boolean
+          county?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          motivation?: string | null
+          phone?: string
+          programme_slug?: string
+          programme_title?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       programmes: {
         Row: {
           body: string | null

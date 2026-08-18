@@ -11,6 +11,12 @@ export const org = {
     country: "Kenya",
   },
   email: "info@youthfrontkenya.org",
+  phone: "0795188010",
+  phoneIntl: "+254795188010",
+  mpesa: {
+    number: "0795188010",
+    name: "YFK Contributions (M-Pesa Send Money)",
+  },
   membershipEmail: "members@youthfrontkenya.org",
   partnershipsEmail: "partnerships@youthfrontkenya.org",
   ethicsEmail: "ethics@youthfrontkenya.org",
