@@ -22,6 +22,7 @@ import { Route as JoinRouteImport } from './routes/join'
 import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as SupportRouteImport } from './routes/support'
 import { Route as VolunteerRouteImport } from './routes/volunteer'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated.admin'
@@ -94,6 +95,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProgramsRoute = ProgramsRouteImport.update({
+  id: '/programs',
+  path: '/programs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SupportRoute = SupportRouteImport.update({
   id: '/support',
   path: '/support',
@@ -125,9 +131,9 @@ const GovernanceSlugRoute = GovernanceSlugRouteImport.update({
   getParentRoute: () => GovernanceRoute,
 } as any)
 const ProgramsIndexRoute = ProgramsIndexRouteImport.update({
-  id: '/programs/',
-  path: '/programs/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProgramsRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/leadership': typeof LeadershipRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
+  '/programs': typeof ProgramsRouteWithChildren
   '/support': typeof SupportRoute
   '/volunteer': typeof VolunteerRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -186,6 +193,7 @@ export interface FileRoutesById {
   '/leadership': typeof LeadershipRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
+  '/programs': typeof ProgramsRouteWithChildren
   '/support': typeof SupportRoute
   '/volunteer': typeof VolunteerRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
@@ -209,6 +217,7 @@ export interface FileRouteTypes {
     | '/leadership'
     | '/news'
     | '/privacy'
+    | '/programs'
     | '/support'
     | '/volunteer'
     | '/admin'
@@ -251,6 +260,7 @@ export interface FileRouteTypes {
     | '/leadership'
     | '/news'
     | '/privacy'
+    | '/programs'
     | '/support'
     | '/volunteer'
     | '/_authenticated/admin'
@@ -274,9 +284,9 @@ export interface RootRouteChildren {
   LeadershipRoute: typeof LeadershipRoute
   NewsRoute: typeof NewsRoute
   PrivacyRoute: typeof PrivacyRoute
+  ProgramsRoute: typeof ProgramsRouteWithChildren
   SupportRoute: typeof SupportRoute
   VolunteerRoute: typeof VolunteerRoute
-  ProgramsIndexRoute: typeof ProgramsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -372,6 +382,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/programs': {
+      id: '/programs'
+      path: '/programs'
+      fullPath: '/programs'
+      preLoaderRoute: typeof ProgramsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/support': {
       id: '/support'
       path: '/support'
@@ -416,10 +433,10 @@ declare module '@tanstack/react-router' {
     }
     '/programs/': {
       id: '/programs/'
-      path: '/programs'
+      path: '/'
       fullPath: '/programs/'
       preLoaderRoute: typeof ProgramsIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ProgramsRoute
     }
   }
 }
@@ -452,6 +469,18 @@ const GovernanceRouteWithChildren = GovernanceRoute._addFileChildren(
   GovernanceRouteChildren,
 )
 
+interface ProgramsRouteChildren {
+  ProgramsIndexRoute: typeof ProgramsIndexRoute
+}
+
+const ProgramsRouteChildren: ProgramsRouteChildren = {
+  ProgramsIndexRoute: ProgramsIndexRoute,
+}
+
+const ProgramsRouteWithChildren = ProgramsRoute._addFileChildren(
+  ProgramsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
@@ -466,9 +495,9 @@ const rootRouteChildren: RootRouteChildren = {
   LeadershipRoute: LeadershipRoute,
   NewsRoute: NewsRoute,
   PrivacyRoute: PrivacyRoute,
+  ProgramsRoute: ProgramsRouteWithChildren,
   SupportRoute: SupportRoute,
   VolunteerRoute: VolunteerRoute,
-  ProgramsIndexRoute: ProgramsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
