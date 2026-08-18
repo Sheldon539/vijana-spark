@@ -30,6 +30,7 @@ import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated
 import { Route as GovernanceIndexRouteImport } from './routes/governance.index'
 import { Route as GovernanceSlugRouteImport } from './routes/governance.$slug'
 import { Route as ProgramsIndexRouteImport } from './routes/programs.index'
+import { Route as ProgramsSlugRouteImport } from './routes/programs.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -135,6 +136,11 @@ const ProgramsIndexRoute = ProgramsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ProgramsRoute,
 } as any)
+const ProgramsSlugRoute = ProgramsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ProgramsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -155,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
   '/governance/': typeof GovernanceIndexRoute
   '/programs/': typeof ProgramsIndexRoute
 }
@@ -175,6 +182,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
   '/governance': typeof GovernanceIndexRoute
   '/programs': typeof ProgramsIndexRoute
 }
@@ -199,6 +207,7 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
   '/governance/': typeof GovernanceIndexRoute
   '/programs/': typeof ProgramsIndexRoute
 }
@@ -223,6 +232,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/portal'
     | '/governance/$slug'
+    | '/programs/$slug'
     | '/governance/'
     | '/programs/'
   fileRoutesByTo: FileRoutesByTo
@@ -243,6 +253,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/portal'
     | '/governance/$slug'
+    | '/programs/$slug'
     | '/governance'
     | '/programs'
   id:
@@ -266,6 +277,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/portal'
     | '/governance/$slug'
+    | '/programs/$slug'
     | '/governance/'
     | '/programs/'
   fileRoutesById: FileRoutesById
@@ -438,6 +450,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgramsIndexRouteImport
       parentRoute: typeof ProgramsRoute
     }
+    '/programs/$slug': {
+      id: '/programs/$slug'
+      path: '/$slug'
+      fullPath: '/programs/$slug'
+      preLoaderRoute: typeof ProgramsSlugRouteImport
+      parentRoute: typeof ProgramsRoute
+    }
   }
 }
 
@@ -470,10 +489,12 @@ const GovernanceRouteWithChildren = GovernanceRoute._addFileChildren(
 )
 
 interface ProgramsRouteChildren {
+  ProgramsSlugRoute: typeof ProgramsSlugRoute
   ProgramsIndexRoute: typeof ProgramsIndexRoute
 }
 
 const ProgramsRouteChildren: ProgramsRouteChildren = {
+  ProgramsSlugRoute: ProgramsSlugRoute,
   ProgramsIndexRoute: ProgramsIndexRoute,
 }
 
