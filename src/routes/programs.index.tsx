@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { programs as fallbackPrograms } from "@/lib/site-data";
@@ -105,6 +105,22 @@ function ProgramsPage() {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    to="/programs/$slug"
+                    params={{ slug: program.slug }}
+                    className="sheen-on-hover inline-flex items-center rounded-sm bg-primary px-6 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground"
+                  >
+                    Enroll now
+                  </Link>
+                  <Link
+                    to="/programs/$slug"
+                    params={{ slug: program.slug }}
+                    className="inline-flex items-center rounded-sm border border-border px-6 py-2.5 text-xs font-bold uppercase tracking-[0.12em] hover:bg-accent"
+                  >
+                    Programme details
+                  </Link>
+                </div>
               </div>
             </article>
           );
