@@ -22,13 +22,13 @@ import { Route as JoinRouteImport } from './routes/join'
 import { Route as LeadershipRouteImport } from './routes/leadership'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as SupportRouteImport } from './routes/support'
 import { Route as VolunteerRouteImport } from './routes/volunteer'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated.admin'
 import { Route as AuthenticatedPortalRouteImport } from './routes/_authenticated.portal'
 import { Route as GovernanceIndexRouteImport } from './routes/governance.index'
 import { Route as GovernanceSlugRouteImport } from './routes/governance.$slug'
+import { Route as ProgramsIndexRouteImport } from './routes/programs.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -94,11 +94,6 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProgramsRoute = ProgramsRouteImport.update({
-  id: '/programs',
-  path: '/programs',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SupportRoute = SupportRouteImport.update({
   id: '/support',
   path: '/support',
@@ -129,6 +124,11 @@ const GovernanceSlugRoute = GovernanceSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => GovernanceRoute,
 } as any)
+const ProgramsIndexRoute = ProgramsIndexRouteImport.update({
+  id: '/programs/',
+  path: '/programs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -143,13 +143,13 @@ export interface FileRoutesByFullPath {
   '/leadership': typeof LeadershipRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
-  '/programs': typeof ProgramsRoute
   '/support': typeof SupportRoute
   '/volunteer': typeof VolunteerRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/governance/': typeof GovernanceIndexRoute
+  '/programs/': typeof ProgramsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -163,13 +163,13 @@ export interface FileRoutesByTo {
   '/leadership': typeof LeadershipRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
-  '/programs': typeof ProgramsRoute
   '/support': typeof SupportRoute
   '/volunteer': typeof VolunteerRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/governance': typeof GovernanceIndexRoute
+  '/programs': typeof ProgramsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -186,13 +186,13 @@ export interface FileRoutesById {
   '/leadership': typeof LeadershipRoute
   '/news': typeof NewsRoute
   '/privacy': typeof PrivacyRoute
-  '/programs': typeof ProgramsRoute
   '/support': typeof SupportRoute
   '/volunteer': typeof VolunteerRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/portal': typeof AuthenticatedPortalRoute
   '/governance/$slug': typeof GovernanceSlugRoute
   '/governance/': typeof GovernanceIndexRoute
+  '/programs/': typeof ProgramsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -209,13 +209,13 @@ export interface FileRouteTypes {
     | '/leadership'
     | '/news'
     | '/privacy'
-    | '/programs'
     | '/support'
     | '/volunteer'
     | '/admin'
     | '/portal'
     | '/governance/$slug'
     | '/governance/'
+    | '/programs/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -229,13 +229,13 @@ export interface FileRouteTypes {
     | '/leadership'
     | '/news'
     | '/privacy'
-    | '/programs'
     | '/support'
     | '/volunteer'
     | '/admin'
     | '/portal'
     | '/governance/$slug'
     | '/governance'
+    | '/programs'
   id:
     | '__root__'
     | '/'
@@ -251,13 +251,13 @@ export interface FileRouteTypes {
     | '/leadership'
     | '/news'
     | '/privacy'
-    | '/programs'
     | '/support'
     | '/volunteer'
     | '/_authenticated/admin'
     | '/_authenticated/portal'
     | '/governance/$slug'
     | '/governance/'
+    | '/programs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -274,9 +274,9 @@ export interface RootRouteChildren {
   LeadershipRoute: typeof LeadershipRoute
   NewsRoute: typeof NewsRoute
   PrivacyRoute: typeof PrivacyRoute
-  ProgramsRoute: typeof ProgramsRoute
   SupportRoute: typeof SupportRoute
   VolunteerRoute: typeof VolunteerRoute
+  ProgramsIndexRoute: typeof ProgramsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -372,13 +372,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/programs': {
-      id: '/programs'
-      path: '/programs'
-      fullPath: '/programs'
-      preLoaderRoute: typeof ProgramsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/support': {
       id: '/support'
       path: '/support'
@@ -420,6 +413,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/governance/$slug'
       preLoaderRoute: typeof GovernanceSlugRouteImport
       parentRoute: typeof GovernanceRoute
+    }
+    '/programs/': {
+      id: '/programs/'
+      path: '/programs'
+      fullPath: '/programs/'
+      preLoaderRoute: typeof ProgramsIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -466,9 +466,9 @@ const rootRouteChildren: RootRouteChildren = {
   LeadershipRoute: LeadershipRoute,
   NewsRoute: NewsRoute,
   PrivacyRoute: PrivacyRoute,
-  ProgramsRoute: ProgramsRoute,
   SupportRoute: SupportRoute,
   VolunteerRoute: VolunteerRoute,
+  ProgramsIndexRoute: ProgramsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

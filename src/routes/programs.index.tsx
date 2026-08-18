@@ -10,7 +10,7 @@ const title = "Programs — Civic Action, Skills, Enterprise & Climate | YFK";
 const description =
   "Explore YFK programs: civic education and advocacy, digital and AI literacy, enterprise, leadership, climate action and youth wellbeing.";
 
-export const Route = createFileRoute("/programs")({
+export const Route = createFileRoute("/programs/")({
   head: () => ({
     meta: [
       { title },
