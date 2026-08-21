@@ -16,6 +16,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CountiesRouteImport } from './routes/counties'
 import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as DonateRouteImport } from './routes/donate'
 import { Route as GetInvolvedRouteImport } from './routes/get-involved'
 import { Route as GovernanceRouteImport } from './routes/governance'
 import { Route as JoinRouteImport } from './routes/join'
@@ -64,6 +65,11 @@ const CountiesRoute = CountiesRouteImport.update({
 const DocumentsRoute = DocumentsRouteImport.update({
   id: '/documents',
   path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonateRoute = DonateRouteImport.update({
+  id: '/donate',
+  path: '/donate',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GetInvolvedRoute = GetInvolvedRouteImport.update({
@@ -149,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/counties': typeof CountiesRoute
   '/documents': typeof DocumentsRoute
+  '/donate': typeof DonateRoute
   '/get-involved': typeof GetInvolvedRoute
   '/governance': typeof GovernanceRouteWithChildren
   '/join': typeof JoinRoute
@@ -172,6 +179,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/counties': typeof CountiesRoute
   '/documents': typeof DocumentsRoute
+  '/donate': typeof DonateRoute
   '/get-involved': typeof GetInvolvedRoute
   '/join': typeof JoinRoute
   '/leadership': typeof LeadershipRoute
@@ -195,6 +203,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/counties': typeof CountiesRoute
   '/documents': typeof DocumentsRoute
+  '/donate': typeof DonateRoute
   '/get-involved': typeof GetInvolvedRoute
   '/governance': typeof GovernanceRouteWithChildren
   '/join': typeof JoinRoute
@@ -220,6 +229,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/counties'
     | '/documents'
+    | '/donate'
     | '/get-involved'
     | '/governance'
     | '/join'
@@ -243,6 +253,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/counties'
     | '/documents'
+    | '/donate'
     | '/get-involved'
     | '/join'
     | '/leadership'
@@ -265,6 +276,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/counties'
     | '/documents'
+    | '/donate'
     | '/get-involved'
     | '/governance'
     | '/join'
@@ -290,6 +302,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   CountiesRoute: typeof CountiesRoute
   DocumentsRoute: typeof DocumentsRoute
+  DonateRoute: typeof DonateRoute
   GetInvolvedRoute: typeof GetInvolvedRoute
   GovernanceRoute: typeof GovernanceRouteWithChildren
   JoinRoute: typeof JoinRoute
@@ -350,6 +363,13 @@ declare module '@tanstack/react-router' {
       path: '/documents'
       fullPath: '/documents'
       preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/donate': {
+      id: '/donate'
+      path: '/donate'
+      fullPath: '/donate'
+      preLoaderRoute: typeof DonateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/get-involved': {
@@ -510,6 +530,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   CountiesRoute: CountiesRoute,
   DocumentsRoute: DocumentsRoute,
+  DonateRoute: DonateRoute,
   GetInvolvedRoute: GetInvolvedRoute,
   GovernanceRoute: GovernanceRouteWithChildren,
   JoinRoute: JoinRoute,
