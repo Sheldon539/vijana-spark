@@ -61,6 +61,7 @@ export function Footer() {
               { to: "/join", label: "Join YFK" },
               { to: "/volunteer", label: "Volunteer" },
               { to: "/support", label: "Support YFK" },
+              { to: "/donate", label: "Donate" },
               { to: "/get-involved", label: "Get Involved" },
               { to: "/contact", label: "Contact us" },
               { to: "/privacy", label: "Privacy Policy" },

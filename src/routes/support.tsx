@@ -61,13 +61,20 @@ function SupportPage() {
       <section className="mt-12 border border-border bg-surface p-8">
         <h2 className="text-3xl">A note on fundraising integrity</h2>
         <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
-          YFK does not fundraise through personal mobile money numbers or personal bank accounts, and
-          no officer or volunteer is authorised to collect funds on their own behalf. If you are asked
-          to send money to a personal number in the name of YFK, treat it as fraudulent and report it
+          {org.mpesa.number} is the only mobile money number authorised to receive YFK
+          contributions, and it is also our official contact line. No officer or volunteer is
+          authorised to collect funds on their own behalf. If you are asked
+          to send money to any other number in the name of YFK, treat it as fraudulent and report it
           to {org.ethicsEmail}. Official account details are issued in writing by the National
           Secretariat and confirmed by the National Treasurer.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            to="/donate"
+            className="inline-flex items-center rounded-sm bg-secondary px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-secondary-foreground"
+          >
+            Donate via M-Pesa
+          </Link>
           <Link
             to="/contact"
             className="inline-flex items-center rounded-sm bg-primary px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-primary-foreground"

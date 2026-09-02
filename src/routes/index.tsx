@@ -93,8 +93,7 @@ function Index() {
               Join YFK
             </Link>
             <Link
-              to="/get-involved"
-              hash="donate"
+              to="/donate"
               className="sheen-on-hover hover-lift inline-flex items-center rounded-sm bg-secondary px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-secondary-foreground"
             >
               Donate
@@ -174,6 +173,15 @@ function Index() {
                   </li>
                 ))}
               </ul>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link
+                  to="/programs/$slug"
+                  params={{ slug: program.slug }}
+                  className="text-xs font-bold uppercase tracking-[0.14em] text-primary"
+                >
+                  Enroll now →
+                </Link>
+              </div>
               </article>
             </Reveal>
           ))}
