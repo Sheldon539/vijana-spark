@@ -1,7 +1,7 @@
 export const impactStats: { label: string; value: number; prefix?: string; suffix?: string }[] = [
   { label: "Members Joined", value: 1200, suffix: "+" },
   { label: "Active Volunteers", value: 80 },
-  { label: "Counties Reached", value: 15 },
+  { label: "Pilot Counties", value: 21 },
   { label: "Community Projects", value: 32 },
   { label: "Contributed (KES)", value: 450000 },
   { label: "Young People Trained", value: 640 },
@@ -9,48 +9,82 @@ export const impactStats: { label: string; value: number; prefix?: string; suffi
   { label: "Tree Seedlings Planted", value: 4500 },
 ];
 
+export const pillars = [
+  {
+    title: "Constitutionalism and Rule of Law",
+    body: "Defending the Constitution of Kenya 2010, promoting legal literacy and holding public institutions to the rule of law.",
+  },
+  {
+    title: "Economic Justice and Youth Empowerment",
+    body: "Fair access to opportunity, youth funds, decent work, enterprise support and livelihoods in every county.",
+  },
+  {
+    title: "Civic Technology and Digital Democracy",
+    body: "Digital literacy, open data and civic tech tools that make participation possible from any ward in Kenya.",
+  },
+  {
+    title: "Unity Beyond Ethnicity",
+    body: "A non-partisan, multi-ethnic movement that organises young Kenyans around issues rather than identity.",
+  },
+  {
+    title: "Accountability and Transparency",
+    body: "Budget tracking, social audits and open reporting of every shilling YFK receives and spends.",
+  },
+  {
+    title: "Civic and Electoral Participation",
+    body: "Voter education, public participation clinics and meaningful youth presence in decision-making forums.",
+  },
+] as const;
+
 export const programs = [
   {
-    slug: "civic-education",
-    title: "Civic Education & Advocacy",
+    slug: "constitutionalism",
+    title: "Constitutionalism & Rule of Law",
     summary:
-      "Constitution literacy, public participation clinics and county budget forums that turn young Kenyans into informed watchdogs.",
-    pillars: ["Constitution literacy", "Public participation", "Budget tracking", "Policy advocacy"],
+      "Constitution literacy, legal awareness clinics and rights education so young Kenyans know, use and defend the law.",
+    pillars: ["Constitution literacy", "Legal awareness", "Rights education", "Rule of law"],
   },
   {
-    slug: "digital-skills",
-    title: "Digital & AI Literacy",
+    slug: "economic-justice",
+    title: "Economic Justice & Youth Empowerment",
     summary:
-      "Practical training in digital tools, data, cyber-safety and applied AI so young people can compete in a digital economy.",
-    pillars: ["Digital skills", "AI literacy", "Cyber safety", "Freelancing"],
+      "Enterprise incubation, financial literacy, market linkages and advocacy for fair access to youth funds and decent work.",
+    pillars: ["Enterprise", "Financial literacy", "Market access", "Youth funds"],
   },
   {
-    slug: "enterprise",
-    title: "Enterprise & Livelihoods",
+    slug: "civic-technology",
+    title: "Civic Technology & Digital Democracy",
     summary:
-      "Business incubation, financial literacy and market linkages for youth-led ventures in every county.",
-    pillars: ["Incubation", "Financial literacy", "Market access", "Youth funds"],
+      "Digital and AI literacy, cyber-safety and civic tech tools that open budgets, data and decisions to young people.",
+    pillars: ["Digital skills", "AI literacy", "Cyber safety", "Open data"],
   },
   {
-    slug: "leadership",
-    title: "Leadership Academy",
+    slug: "unity-beyond-ethnicity",
+    title: "Unity Beyond Ethnicity",
     summary:
-      "A structured pathway from ward organiser to national leader, built on governance, public speaking and ethics.",
-    pillars: ["Governance", "Public speaking", "Ethics", "Mentorship"],
+      "Inter-county youth exchanges, peace building and dialogue forums that organise young Kenyans around issues, not identity.",
+    pillars: ["National cohesion", "Peace building", "Dialogue", "Youth exchanges"],
+  },
+  {
+    slug: "accountability",
+    title: "Accountability & Transparency",
+    summary:
+      "County budget tracking, social audits and citizen report cards led by trained ward-level monitors.",
+    pillars: ["Budget tracking", "Social audits", "Report cards", "Oversight"],
+  },
+  {
+    slug: "civic-participation",
+    title: "Civic & Electoral Participation",
+    summary:
+      "Voter education, public participation clinics and memoranda drafting so youth voices shape laws and county plans.",
+    pillars: ["Voter education", "Public participation", "Memoranda", "Leadership pathway"],
   },
   {
     slug: "environment",
-    title: "Climate & Environment",
+    title: "Environmental Sustainability",
     summary:
-      "Tree-growing drives, clean-up campaigns and climate action chapters anchored in schools and wards.",
+      "Tree-growing drives, clean-up campaigns and climate action chapters anchored in schools, colleges and wards.",
     pillars: ["Tree growing", "Clean-ups", "Climate action", "Water"],
-  },
-  {
-    slug: "wellbeing",
-    title: "Health & Wellbeing",
-    summary:
-      "Mental health peer support, safeguarding and gender-responsive programming for young people at risk.",
-    pillars: ["Mental health", "Safeguarding", "GBV response", "Peer support"],
   },
 ] as const;
 
@@ -137,51 +171,25 @@ export type CountyRegion =
   | "North Eastern";
 
 export const counties: { name: string; region: CountyRegion; members: number }[] = [
-  { name: "Mombasa", region: "Coast", members: 80 },
-  { name: "Kwale", region: "Coast", members: 0 },
-  { name: "Kilifi", region: "Coast", members: 50 },
-  { name: "Tana River", region: "Coast", members: 0 },
-  { name: "Lamu", region: "Coast", members: 0 },
-  { name: "Taita Taveta", region: "Coast", members: 0 },
-  { name: "Garissa", region: "North Eastern", members: 0 },
-  { name: "Wajir", region: "North Eastern", members: 0 },
-  { name: "Mandera", region: "North Eastern", members: 0 },
-  { name: "Marsabit", region: "Eastern", members: 0 },
-  { name: "Isiolo", region: "Eastern", members: 0 },
-  { name: "Meru", region: "Eastern", members: 60 },
-  { name: "Tharaka Nithi", region: "Eastern", members: 0 },
-  { name: "Embu", region: "Eastern", members: 0 },
-  { name: "Kitui", region: "Eastern", members: 0 },
-  { name: "Machakos", region: "Eastern", members: 75 },
-  { name: "Makueni", region: "Eastern", members: 0 },
-  { name: "Nyandarua", region: "Central", members: 0 },
-  { name: "Nyeri", region: "Central", members: 55 },
-  { name: "Kirinyaga", region: "Central", members: 0 },
-  { name: "Murang'a", region: "Central", members: 0 },
-  { name: "Kiambu", region: "Central", members: 95 },
-  { name: "Turkana", region: "Rift Valley", members: 0 },
-  { name: "West Pokot", region: "Rift Valley", members: 0 },
-  { name: "Samburu", region: "Rift Valley", members: 0 },
-  { name: "Trans Nzoia", region: "Rift Valley", members: 0 },
-  { name: "Uasin Gishu", region: "Rift Valley", members: 70 },
-  { name: "Elgeyo Marakwet", region: "Rift Valley", members: 0 },
-  { name: "Nandi", region: "Rift Valley", members: 0 },
-  { name: "Baringo", region: "Rift Valley", members: 0 },
-  { name: "Laikipia", region: "Rift Valley", members: 0 },
-  { name: "Nakuru", region: "Rift Valley", members: 90 },
-  { name: "Narok", region: "Rift Valley", members: 0 },
-  { name: "Kajiado", region: "Rift Valley", members: 55 },
-  { name: "Kericho", region: "Rift Valley", members: 0 },
-  { name: "Bomet", region: "Rift Valley", members: 0 },
-  { name: "Kakamega", region: "Western", members: 70 },
-  { name: "Vihiga", region: "Western", members: 0 },
-  { name: "Bungoma", region: "Western", members: 50 },
-  { name: "Busia", region: "Western", members: 0 },
-  { name: "Siaya", region: "Nyanza", members: 0 },
-  { name: "Kisumu", region: "Nyanza", members: 85 },
-  { name: "Homa Bay", region: "Nyanza", members: 45 },
-  { name: "Migori", region: "Nyanza", members: 0 },
-  { name: "Kisii", region: "Nyanza", members: 65 },
-  { name: "Nyamira", region: "Nyanza", members: 0 },
   { name: "Nairobi", region: "Nairobi", members: 255 },
+  { name: "Kisii", region: "Nyanza", members: 65 },
+  { name: "Migori", region: "Nyanza", members: 40 },
+  { name: "Homa Bay", region: "Nyanza", members: 45 },
+  { name: "Busia", region: "Western", members: 35 },
+  { name: "Siaya", region: "Nyanza", members: 40 },
+  { name: "Trans Nzoia", region: "Rift Valley", members: 38 },
+  { name: "Bungoma", region: "Western", members: 50 },
+  { name: "Bomet", region: "Rift Valley", members: 30 },
+  { name: "Kericho", region: "Rift Valley", members: 32 },
+  { name: "Narok", region: "Rift Valley", members: 28 },
+  { name: "Nakuru", region: "Rift Valley", members: 90 },
+  { name: "Laikipia", region: "Rift Valley", members: 25 },
+  { name: "Uasin Gishu", region: "Rift Valley", members: 70 },
+  { name: "Turkana", region: "Rift Valley", members: 20 },
+  { name: "Nyeri", region: "Central", members: 55 },
+  { name: "Embu", region: "Eastern", members: 26 },
+  { name: "Meru", region: "Eastern", members: 60 },
+  { name: "Garissa", region: "North Eastern", members: 18 },
+  { name: "Tana River", region: "Coast", members: 15 },
+  { name: "Kilifi", region: "Coast", members: 50 },
 ];
