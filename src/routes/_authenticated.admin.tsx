@@ -217,17 +217,46 @@ const enquiriesConfig: CrudConfig = {
   ],
 };
 
+const enrolmentsConfig: CrudConfig = {
+  table: "programme_enrolments",
+  title: "Programme enrolments",
+  description: "People who enrolled through a programme page.",
+  primaryField: "full_name",
+  secondaryField: "programme_title",
+  orderBy: { column: "created_at", ascending: false },
+  allowCreate: false,
+  fields: [
+    { name: "full_name", label: "Full name", type: "text", readOnly: true },
+    { name: "programme_title", label: "Programme", type: "text", readOnly: true },
+    { name: "programme_slug", label: "Programme slug", type: "text", readOnly: true },
+    { name: "email", label: "Email", type: "text", readOnly: true },
+    { name: "phone", label: "Phone", type: "text", readOnly: true },
+    { name: "county", label: "County", type: "text", readOnly: true },
+    { name: "age", label: "Age", type: "number", readOnly: true },
+    { name: "motivation", label: "Motivation", type: "textarea", readOnly: true },
+    {
+      name: "status",
+      label: "Status",
+      type: "select",
+      options: ["new", "contacted", "enrolled", "completed", "declined"],
+    },
+    { name: "admin_notes", label: "Internal notes", type: "textarea" },
+  ],
+};
+
 const tabs: { key: string; label: string; config?: CrudConfig }[] = [
   { key: "overview", label: "Overview" },
   { key: "documents", label: "Documents", config: documentsConfig },
   { key: "leaders", label: "Leadership", config: leadersConfig },
   { key: "programmes", label: "Programmes", config: programmesConfig },
+  { key: "enrolments", label: "Enrolments", config: enrolmentsConfig },
   { key: "news", label: "News", config: newsConfig },
   { key: "donations", label: "Donations", config: donationsConfig },
   { key: "membership", label: "Membership", config: membershipConfig },
   { key: "volunteers", label: "Volunteers", config: volunteerConfig },
   { key: "enquiries", label: "Enquiries", config: enquiriesConfig },
 ];
+
 
 function AdminPage() {
   const { user } = useAuth();
