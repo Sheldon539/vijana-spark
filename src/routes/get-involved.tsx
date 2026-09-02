@@ -119,8 +119,9 @@ function GetInvolvedPage() {
         <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
           YFK is funded by small contributions from many young Kenyans, and KES 450,000 has been
           contributed to date. Contributions are received only through official YFK accounts, never
-          through personal mobile money numbers. Online giving through a licensed provider is being
-          built; in the meantime the Secretariat issues official details and receipts in writing.
+          through unofficial channels. You can give right now via M-Pesa Send Money to 0795188010, our
+          official contribution and contact line, and record your gift so the Secretariat can
+          receipt it.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {givingTiers.map(([amount, text]) => (
@@ -131,12 +132,20 @@ function GetInvolvedPage() {
           ))}
         </div>
 
-        <Link
-          to="/support"
-          className="mt-6 inline-block rounded-sm bg-primary px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground"
-        >
-          How to support YFK
-        </Link>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            to="/donate"
+            className="inline-block rounded-sm bg-primary px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground"
+          >
+            Donate via M-Pesa
+          </Link>
+          <Link
+            to="/support"
+            className="inline-block rounded-sm border border-border px-6 py-3 text-xs font-bold uppercase tracking-[0.12em] hover:bg-accent"
+          >
+            How to support YFK
+          </Link>
+        </div>
 
         <div className="mt-8 max-w-md">
           <div className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground">
