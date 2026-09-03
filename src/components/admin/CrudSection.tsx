@@ -7,11 +7,13 @@ import { Field, fieldClass } from "@/components/forms/Field";
 export type CrudField = {
   name: string;
   label: string;
-  type: "text" | "textarea" | "number" | "date" | "select" | "checkbox" | "list";
+  type: "text" | "textarea" | "number" | "date" | "select" | "checkbox" | "list" | "file";
   options?: string[];
   required?: boolean;
   hint?: string;
   readOnly?: boolean;
+  bucket?: string;
+  accept?: string;
 };
 
 export type CrudConfig = {
