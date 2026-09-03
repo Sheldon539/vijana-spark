@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Counter } from "@/components/site/Counter";
 import { Reveal } from "@/components/motion/Reveal";
 import { Marquee } from "@/components/motion/Marquee";
-import { impactStats, news, programs } from "@/lib/site-data";
+import { impactStats, news, pillars, programs } from "@/lib/site-data";
 import heroImage from "@/assets/hero-youth.jpg";
 import civicImage from "@/assets/program-civic.jpg";
 import digitalImage from "@/assets/program-digital.jpg";
@@ -10,7 +10,7 @@ import environmentImage from "@/assets/program-environment.jpg";
 
 const title = "The Youth Front of Kenya — Sauti ya Vijana; Haki Yetu, Nchi Yetu";
 const description =
-  "YFK is Kenya's youth movement for civic action, training and enterprise across all 47 counties. Join, volunteer, donate or explore our programs.";
+  "A national, youth-led movement organising young Kenyans for constitutionalism, accountable leadership, civic participation, economic empowerment and digital literacy.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -82,8 +82,10 @@ function Index() {
             Sauti ya Vijana; Haki Yetu, Nchi Yetu.
           </p>
           <p className="mt-4 max-w-xl text-base text-muted-foreground">
-            A national movement organising young Kenyans in every ward for civic participation,
-            training, enterprise and accountable leadership.
+            A national, youth-led movement organising young Kenyans in every county to promote
+            constitutionalism and the rule of law, good governance, accountable leadership,
+            meaningful civic participation, youth economic empowerment, digital literacy, national
+            cohesion and to champion environmental sustainability.
           </p>
           <div className="animate-rise mt-8 flex flex-wrap gap-3" style={{ animationDelay: "0.25s" }}>
             <Link
@@ -120,10 +122,11 @@ function Index() {
           items={[
             "Sauti ya Vijana",
             "Haki Yetu, Nchi Yetu",
-            "47 Counties",
-            "Civic Action",
-            "Youth Enterprise",
-            "Climate Justice",
+            "21 Pilot Counties",
+            "Constitutionalism",
+            "Economic Justice",
+            "Digital Democracy",
+            "Unity Beyond Ethnicity",
           ]}
         />
       </div>
@@ -152,9 +155,29 @@ function Index() {
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
         <Reveal>
+          <p className="eyebrow">Our pillars</p>
+          <h2 className="mt-2 max-w-2xl text-4xl sm:text-5xl">Six pillars of the front</h2>
+        </Reveal>
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {pillars.map((pillar, i) => (
+            <Reveal key={pillar.title} delay={(i % 3) * 110} className="flex">
+              <article className="hover-lift flex w-full flex-col border-l-2 border-primary bg-card p-6">
+                <p className="font-display text-3xl text-primary">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-2 text-2xl leading-tight">{pillar.title}</h3>
+                <p className="mt-3 text-sm text-muted-foreground">{pillar.body}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <Reveal>
           <p className="eyebrow">What we do</p>
           <h2 className="mt-2 max-w-2xl text-4xl sm:text-5xl">
-            Six pillars, one movement, forty-seven counties
+            Programmes delivered in 21 pilot counties
           </h2>
         </Reveal>
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">

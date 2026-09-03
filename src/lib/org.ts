@@ -10,16 +10,16 @@ export const org = {
     city: "P.O. Box 12345–00100, Nairobi",
     country: "Kenya",
   },
-  email: "info@youthfrontkenya.org",
+  email: "youthfrontofkenya@gmail.com",
   phone: "0795188010",
   phoneIntl: "+254795188010",
   mpesa: {
     number: "0795188010",
     name: "YFK Contributions (M-Pesa Send Money)",
   },
-  membershipEmail: "members@youthfrontkenya.org",
-  partnershipsEmail: "partnerships@youthfrontkenya.org",
-  ethicsEmail: "ethics@youthfrontkenya.org",
+  membershipEmail: "youthfrontofkenya@gmail.com",
+  partnershipsEmail: "youthfrontofkenya@gmail.com",
+  ethicsEmail: "youthfrontofkenya@gmail.com",
   officeHours: "Monday to Friday, 9:00am – 5:00pm EAT",
   socials: [
     { label: "X (Twitter)", handle: "@youthfrontke", url: "https://x.com/youthfrontke", icon: "X" },
@@ -32,11 +32,11 @@ export const org = {
 } as const;
 
 export const identity = {
-  who: "The Youth Front of Kenya (YFK) is a youth-led, non-partisan Public Benefit Organization founded in 2026 by young organisers, students, small business owners and community volunteers. It is a membership movement: every member registers through a county chapter and a ward cell, and every leader is answerable to that membership.",
+  who: "The Youth Front of Kenya (YFK) is a national, youth-led movement organising young Kenyans in every county to promote constitutionalism and the rule of law, good governance, accountable leadership, meaningful civic participation, youth economic empowerment, digital literacy, national cohesion and environmental sustainability. It is a membership movement: every member registers through a county structure and a ward cell, and every leader is answerable to that membership.",
   why: "Young Kenyans are the majority of the population but the minority in decision-making rooms. YFK exists to close that gap permanently — organising young people between elections, not just during them, so that public participation, budget decisions and youth funds are shaped by the people they affect.",
   what: "YFK runs civic education and public participation clinics, digital and AI literacy training, enterprise and livelihoods support, a leadership academy, climate action drives and youth wellbeing programmes. Work is delivered by volunteers in county chapters with support from a small national secretariat.",
   stands: "Constitutionalism, integrity, non-violence, inclusion of every county and ability, transparency in every shilling received, and the belief that leadership is stewardship rather than privilege.",
-  where: "YFK is headquartered in Nairobi and currently active in 15 counties, with chapters forming in the remaining counties. Our long-term goal is a functioning cell in every one of Kenya's 1,450 wards.",
+  where: "YFK is headquartered in Nairobi and is rolling out through 21 pilot counties, with structures forming in the remaining counties. Our long-term goal is a functioning cell in every one of Kenya's 1,450 wards, plus chapters in universities, TVETs and colleges.",
 } as const;
 
 export const governancePrinciples = [

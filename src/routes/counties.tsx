@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { counties, type CountyRegion } from "@/lib/site-data";
 
-const title = "Counties — YFK Chapters in All 47 Counties";
+const title = "Counties — YFK Structures in 21 Pilot Counties";
 const description =
-  "Find your YFK county chapter: coordinators, membership numbers, projects and volunteer opportunities across all 47 Kenyan counties.";
+  "Find your YFK county structure: coordinators, membership numbers, projects and volunteer opportunities across our 21 pilot counties.";
 
 export const Route = createFileRoute("/counties")({
   head: () => ({
@@ -49,10 +49,11 @@ function CountiesPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
       <p className="eyebrow">National footprint</p>
-      <h1 className="mt-3 max-w-3xl text-5xl sm:text-7xl">47 counties. One front.</h1>
+      <h1 className="mt-3 max-w-3xl text-5xl sm:text-7xl">21 pilot counties. One front.</h1>
       <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-        Every county has a coordinator and a chapter. Search or filter to find yours — full county
-        pages with leadership, projects and events arrive with the members portal.
+        YFK is rolling out through 21 pilot counties, each with a County Executive Committee,
+        constituency and ward coordinators. Search or filter to find yours — full county pages with
+        leadership, projects and events arrive with the members portal.
       </p>
 
       <div className="mt-10 flex flex-wrap items-center gap-3">
