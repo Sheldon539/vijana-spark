@@ -7,11 +7,13 @@ import { Field, fieldClass } from "@/components/forms/Field";
 export type CrudField = {
   name: string;
   label: string;
-  type: "text" | "textarea" | "number" | "date" | "select" | "checkbox" | "list";
+  type: "text" | "textarea" | "number" | "date" | "select" | "checkbox" | "list" | "file";
   options?: string[];
   required?: boolean;
   hint?: string;
   readOnly?: boolean;
+  bucket?: string;
+  accept?: string;
 };
 
 export type CrudConfig = {
@@ -197,6 +199,14 @@ export function CrudSection({ config }: { config: CrudConfig }) {
                       </option>
                     ))}
                   </select>
+                ) : f.type === "file" ? (
+                  <FileUpload
+                    id={`${table}-${f.name}`}
+                    bucket={f.bucket ?? "documents"}
+                    accept={f.accept ?? "application/pdf"}
+                    value={String(form[f.name] ?? "")}
+                    onChange={(v) => setForm({ ...form, [f.name]: v })}
+                  />
                 ) : f.type === "checkbox" ? (
                   <input
                     id={`${table}-${f.name}`}
