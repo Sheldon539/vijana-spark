@@ -6,9 +6,9 @@ import civicImage from "@/assets/program-civic.jpg";
 import digitalImage from "@/assets/program-digital.jpg";
 import environmentImage from "@/assets/program-environment.jpg";
 
-const title = "Programs — Civic Action, Skills, Enterprise & Climate | YFK";
+const title = "Programmes — Constitutionalism, Economic Justice & Civic Tech | YFK";
 const description =
-  "Explore YFK programs: civic education and advocacy, digital and AI literacy, enterprise, leadership, climate action and youth wellbeing.";
+  "Explore YFK programmes: constitutionalism and rule of law, economic justice, civic technology, unity beyond ethnicity, accountability, civic participation and environmental sustainability.";
 
 export const Route = createFileRoute("/programs/")({
   head: () => ({
