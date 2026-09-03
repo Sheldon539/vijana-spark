@@ -199,6 +199,14 @@ export function CrudSection({ config }: { config: CrudConfig }) {
                       </option>
                     ))}
                   </select>
+                ) : f.type === "file" ? (
+                  <FileUpload
+                    id={`${table}-${f.name}`}
+                    bucket={f.bucket ?? "documents"}
+                    accept={f.accept ?? "application/pdf"}
+                    value={String(form[f.name] ?? "")}
+                    onChange={(v) => setForm({ ...form, [f.name]: v })}
+                  />
                 ) : f.type === "checkbox" ? (
                   <input
                     id={`${table}-${f.name}`}
