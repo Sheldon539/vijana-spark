@@ -6,9 +6,9 @@ import civicImage from "@/assets/program-civic.jpg";
 import digitalImage from "@/assets/program-digital.jpg";
 import environmentImage from "@/assets/program-environment.jpg";
 
-const title = "Programs — Civic Action, Skills, Enterprise & Climate | YFK";
+const title = "Programmes — Constitutionalism, Economic Justice & Civic Tech | YFK";
 const description =
-  "Explore YFK programs: civic education and advocacy, digital and AI literacy, enterprise, leadership, climate action and youth wellbeing.";
+  "Explore YFK programmes: constitutionalism and rule of law, economic justice, civic technology, unity beyond ethnicity, accountability, civic participation and environmental sustainability.";
 
 export const Route = createFileRoute("/programs/")({
   head: () => ({
@@ -26,8 +26,15 @@ export const Route = createFileRoute("/programs/")({
 });
 
 const imageBySlug: Record<string, { src: string; alt: string }> = {
-  "civic-education": { src: civicImage, alt: "Young Kenyan addressing a community town hall" },
-  "digital-skills": { src: digitalImage, alt: "Young Kenyans training on laptops in a community lab" },
+  constitutionalism: { src: civicImage, alt: "Young Kenyan addressing a community town hall" },
+  "civic-participation": {
+    src: civicImage,
+    alt: "Young Kenyans at a public participation forum",
+  },
+  "civic-technology": {
+    src: digitalImage,
+    alt: "Young Kenyans training on laptops in a community lab",
+  },
   environment: { src: environmentImage, alt: "Volunteers planting tree seedlings" },
 };
 

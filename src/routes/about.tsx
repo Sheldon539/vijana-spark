@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { identity, org } from "@/lib/org";
+import { governanceOrgans } from "@/lib/leadership-structure";
 
 const title = "About YFK — Vision, Governance & Transparency";
 const description =
@@ -30,7 +31,7 @@ const values = [
 ];
 
 const objectives = [
-  "Register and organise members in all 47 counties and 1,450 wards.",
+  "Register and organise members across 21 pilot counties, then all 47 counties and 1,450 wards.",
   "Deliver civic education and public participation clinics year-round.",
   "Train 100,000 young Kenyans in digital, AI and enterprise skills.",
   "Champion transparency in county and national youth funds.",
@@ -38,14 +39,7 @@ const objectives = [
   "Publish audited accounts and impact reports annually.",
 ];
 
-const structure = [
-  ["National Assembly", "Supreme decision-making organ of the membership."],
-  ["National Executive Council", "Chairperson, Secretary General, Treasurer and portfolio leads."],
-  ["Regional Coordination", "Eight regional blocs linking counties to the secretariat."],
-  ["County Chapters", "County coordinator, executive committee and thematic leads."],
-  ["Ward Cells", "The frontline unit: organisers, volunteers and youth groups."],
-  ["Secretariat", "Full-time staff running programs, finance and compliance."],
-];
+const structure = governanceOrgans;
 
 function AboutPage() {
   return (

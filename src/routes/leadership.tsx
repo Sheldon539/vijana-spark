@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { org } from "@/lib/org";
+import { leadershipStructure } from "@/lib/leadership-structure";
 
 const title = "National Leadership Directory — YFK";
 const description =
@@ -140,6 +141,34 @@ function LeadershipPage() {
           </section>
         ))
       )}
+
+      <section className="mt-20 border-t border-border pt-12">
+        <p className="eyebrow">Leadership structure</p>
+        <h2 className="mt-2 text-4xl sm:text-5xl">Offices of the movement</h2>
+        <p className="mt-4 max-w-3xl text-sm text-muted-foreground">
+          These are the offices established under the YFK Constitution and Governance Charter.
+          Profiles are published above as each office is filled through the elective and appointment
+          processes.
+        </p>
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {leadershipStructure.map((organ) => (
+            <div key={organ.organ} className="border-l-2 border-secondary bg-card p-6">
+              <h3 className="text-2xl">{organ.organ}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{organ.blurb}</p>
+              <ul className="mt-4 space-y-2">
+                {organ.positions.map((position) => (
+                  <li
+                    key={position}
+                    className="border-b border-border pb-2 text-sm text-muted-foreground last:border-0"
+                  >
+                    {position}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
