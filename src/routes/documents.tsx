@@ -59,7 +59,18 @@ function DocumentsPage() {
         .eq("status", "Published")
         .order("sort_order", { ascending: true });
       if (error) throw error;
-      return (data ?? []) as DocRow[];
+      const rows = (data ?? []) as DocRow[];
+      const paths = rows.map((r) => r.file_path).filter((p): p is string => Boolean(p));
+      if (paths.length === 0) return rows;
+      const signed = await supabase.storage.from("documents").createSignedUrls(paths, 60 * 60);
+      const map = new Map<string, string>();
+      for (const s of signed.data ?? []) {
+        if (s.path && s.signedUrl) map.set(s.path, s.signedUrl);
+      }
+      return rows.map((r) => ({
+        ...r,
+        file_path: r.file_path ? (map.get(r.file_path) ?? null) : null,
+      }));
     },
   });
 
@@ -131,7 +142,7 @@ function DocumentsPage() {
       ) : (
         <ul className="mt-8 divide-y divide-border border-b border-border">
           {filtered.map((d) => {
-            const url = d.external_url ?? d.file_path ?? null;
+            const url = d.file_path ?? d.external_url ?? null;
             return (
               <li key={d.id} className="grid gap-4 py-6 md:grid-cols-[1fr_auto] md:items-start">
                 <div>

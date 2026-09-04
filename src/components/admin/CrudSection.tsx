@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Field, fieldClass } from "@/components/forms/Field";
+import { FileUpload } from "@/components/admin/FileUpload";
 
 export type CrudField = {
   name: string;
