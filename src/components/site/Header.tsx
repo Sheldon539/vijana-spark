@@ -17,7 +17,7 @@ const nav = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const { session } = useAuth();
+  const { session, signOut } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
@@ -45,12 +45,21 @@ export function Header() {
             </Link>
           ))}
           {session ? (
-            <Link
-              to="/portal"
-              className="ml-2 inline-flex items-center rounded-sm bg-primary px-4 py-2 text-[0.78rem] font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:-translate-y-0.5"
-            >
-              My Portal
-            </Link>
+            <>
+              <Link
+                to="/portal"
+                className="rounded-sm px-2 py-2 text-[0.78rem] font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+              >
+                My Portal
+              </Link>
+              <button
+                type="button"
+                onClick={() => signOut()}
+                className="ml-2 inline-flex items-center rounded-sm border border-border px-4 py-2 text-[0.78rem] font-bold uppercase tracking-wide text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              >
+                Sign out
+              </button>
+            </>
           ) : (
             <>
               <Link
@@ -95,13 +104,35 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Link
-            to={session ? "/portal" : "/join"}
-            onClick={() => setOpen(false)}
-            className="mt-4 block bg-primary px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-primary-foreground"
-          >
-            {session ? "My Portal" : "Join YFK"}
-          </Link>
+          {session ? (
+            <>
+              <Link
+                to="/portal"
+                onClick={() => setOpen(false)}
+                className="mt-4 block bg-primary px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-primary-foreground"
+              >
+                My Portal
+              </Link>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  signOut();
+                }}
+                className="mt-2 block w-full border border-border px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-muted-foreground"
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/join"
+              onClick={() => setOpen(false)}
+              className="mt-4 block bg-primary px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-primary-foreground"
+            >
+              Join YFK
+            </Link>
+          )}
         </nav>
       )}
     </header>
