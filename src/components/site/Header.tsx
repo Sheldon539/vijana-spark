@@ -17,7 +17,7 @@ const nav = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const { session } = useAuth();
+  const { session, signOut } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
