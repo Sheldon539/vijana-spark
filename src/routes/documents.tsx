@@ -142,7 +142,7 @@ function DocumentsPage() {
       ) : (
         <ul className="mt-8 divide-y divide-border border-b border-border">
           {filtered.map((d) => {
-            const url = d.external_url ?? d.file_path ?? null;
+            const url = d.file_path ?? d.external_url ?? null;
             return (
               <li key={d.id} className="grid gap-4 py-6 md:grid-cols-[1fr_auto] md:items-start">
                 <div>
