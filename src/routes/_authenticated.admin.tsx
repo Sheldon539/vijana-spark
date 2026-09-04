@@ -53,7 +53,15 @@ const documentsConfig: CrudConfig = {
     { name: "version", label: "Version", type: "text" },
     { name: "doc_date", label: "Document date", type: "date" },
     { name: "status", label: "Status", type: "select", options: ["Published", "Draft", "Archived"] },
-    { name: "external_url", label: "Document URL", type: "text", hint: "Link to the PDF (View / Download buttons use this)." },
+    {
+      name: "file_path",
+      label: "Upload PDF",
+      type: "file",
+      bucket: "documents",
+      accept: "application/pdf",
+      hint: "Upload the document file. Used by the View / Download buttons.",
+    },
+    { name: "external_url", label: "Document URL", type: "text", hint: "Optional external link, used only when no file is uploaded." },
     { name: "sort_order", label: "Sort order", type: "number" },
   ],
 };
