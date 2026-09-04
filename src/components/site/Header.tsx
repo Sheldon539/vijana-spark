@@ -104,13 +104,35 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Link
-            to={session ? "/portal" : "/join"}
-            onClick={() => setOpen(false)}
-            className="mt-4 block bg-primary px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-primary-foreground"
-          >
-            {session ? "My Portal" : "Join YFK"}
-          </Link>
+          {session ? (
+            <>
+              <Link
+                to="/portal"
+                onClick={() => setOpen(false)}
+                className="mt-4 block bg-primary px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-primary-foreground"
+              >
+                My Portal
+              </Link>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  signOut();
+                }}
+                className="mt-2 block w-full border border-border px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-muted-foreground"
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/join"
+              onClick={() => setOpen(false)}
+              className="mt-4 block bg-primary px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-primary-foreground"
+            >
+              Join YFK
+            </Link>
+          )}
         </nav>
       )}
     </header>
