@@ -45,12 +45,21 @@ export function Header() {
             </Link>
           ))}
           {session ? (
-            <Link
-              to="/portal"
-              className="ml-2 inline-flex items-center rounded-sm bg-primary px-4 py-2 text-[0.78rem] font-bold uppercase tracking-wide text-primary-foreground transition-transform hover:-translate-y-0.5"
-            >
-              My Portal
-            </Link>
+            <>
+              <Link
+                to="/portal"
+                className="rounded-sm px-2 py-2 text-[0.78rem] font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+              >
+                My Portal
+              </Link>
+              <button
+                type="button"
+                onClick={() => signOut()}
+                className="ml-2 inline-flex items-center rounded-sm border border-border px-4 py-2 text-[0.78rem] font-bold uppercase tracking-wide text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              >
+                Sign out
+              </button>
+            </>
           ) : (
             <>
               <Link
