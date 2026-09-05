@@ -291,16 +291,9 @@ function AdminPage() {
   }
 
   if (!isAdmin) {
-    return (
-      <div className="mx-auto max-w-3xl px-4 py-24 sm:px-6">
-        <h1 className="text-4xl">Administrators only</h1>
-        <p className="mt-3 text-sm text-muted-foreground">
-          This area manages official YFK content and personal data. Ask the National Secretariat to
-          grant your account the administrator role.
-        </p>
-      </div>
-    );
+    return <ClaimAdmin onGranted={() => roles.refetch()} />;
   }
+
 
   const active = tabs.find((t) => t.key === tab);
 
