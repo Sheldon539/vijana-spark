@@ -291,16 +291,9 @@ function AdminPage() {
   }
 
   if (!isAdmin) {
-    return (
-      <div className="mx-auto max-w-3xl px-4 py-24 sm:px-6">
-        <h1 className="text-4xl">Administrators only</h1>
-        <p className="mt-3 text-sm text-muted-foreground">
-          This area manages official YFK content and personal data. Ask the National Secretariat to
-          grant your account the administrator role.
-        </p>
-      </div>
-    );
+    return <ClaimAdmin onGranted={() => roles.refetch()} />;
   }
+
 
   const active = tabs.find((t) => t.key === tab);
 
@@ -400,5 +393,52 @@ function Overview() {
         </div>
       )}
     </section>
+  );
+}
+function ClaimAdmin({ onGranted }: { onGranted: () => void }) {
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState<string | null>(null);
+
+  async function claim() {
+    setBusy(true);
+    setMsg(null);
+    const { data, error } = await (
+      supabase as unknown as {
+        rpc: (fn: string) => Promise<{ data: string | null; error: { message: string } | null }>;
+      }
+    ).rpc("claim_first_admin");
+    setBusy(false);
+    if (error) {
+      setMsg(error.message);
+      return;
+    }
+    if (data === "granted" || data === "already_admin") {
+      onGranted();
+      return;
+    }
+    setMsg(
+      data === "admin_exists"
+        ? "An administrator already exists. Ask them to grant your account access."
+        : "Please sign in again and retry.",
+    );
+  }
+
+  return (
+    <div className="mx-auto max-w-3xl px-4 py-24 sm:px-6">
+      <h1 className="text-4xl">Administrators only</h1>
+      <p className="mt-3 text-sm text-muted-foreground">
+        This area manages official YFK content and personal data, including document uploads. If no
+        administrator has been set up yet, you can claim that role for this account now.
+      </p>
+      <button
+        type="button"
+        onClick={() => void claim()}
+        disabled={busy}
+        className="mt-6 rounded-sm bg-primary px-6 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground disabled:opacity-60"
+      >
+        {busy ? "Setting up…" : "Make this account the administrator"}
+      </button>
+      {msg ? <p className="mt-4 text-sm text-destructive">{msg}</p> : null}
+    </div>
   );
 }
