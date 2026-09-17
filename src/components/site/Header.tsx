@@ -125,13 +125,22 @@ export function Header() {
               </button>
             </>
           ) : (
-            <Link
-              to="/join"
-              onClick={() => setOpen(false)}
-              className="mt-4 block bg-primary px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-primary-foreground"
-            >
-              Join YFK
-            </Link>
+            <>
+              <Link
+                to="/auth"
+                onClick={() => setOpen(false)}
+                className="mt-4 block border border-border px-4 py-3 text-center text-sm font-bold uppercase tracking-wide"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/join"
+                onClick={() => setOpen(false)}
+                className="mt-2 block bg-primary px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-primary-foreground"
+              >
+                Join YFK
+              </Link>
+            </>
           )}
         </nav>
       )}
