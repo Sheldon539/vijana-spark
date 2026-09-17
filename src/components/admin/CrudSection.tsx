@@ -137,6 +137,97 @@ export function CrudSection({ config }: { config: CrudConfig }) {
     setEditing(row.id);
   }
 
+  function renderEditor(className: string) {
+    return (
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          save.mutate();
+        }}
+        className={`grid gap-5 border border-border bg-card p-6 sm:grid-cols-2 ${className}`}
+      >
+        {fields.map((f) => (
+          <div key={f.name} className={f.type === "textarea" ? "sm:col-span-2" : undefined}>
+            <Field
+              label={f.label}
+              htmlFor={`${table}-${f.name}`}
+              required={f.required}
+              hint={f.hint}
+            >
+              {f.readOnly ? (
+                <p className="text-sm text-muted-foreground">
+                  {String(form[f.name] ?? "") || "—"}
+                </p>
+              ) : f.type === "textarea" ? (
+                <textarea
+                  id={`${table}-${f.name}`}
+                  rows={4}
+                  className={fieldClass}
+                  value={String(form[f.name] ?? "")}
+                  onChange={(e) => setForm({ ...form, [f.name]: e.target.value })}
+                />
+              ) : f.type === "select" ? (
+                <select
+                  id={`${table}-${f.name}`}
+                  className={fieldClass}
+                  value={String(form[f.name] ?? "")}
+                  onChange={(e) => setForm({ ...form, [f.name]: e.target.value })}
+                >
+                  <option value="">Select…</option>
+                  {(f.options ?? []).map((o) => (
+                    <option key={o} value={o}>
+                      {o}
+                    </option>
+                  ))}
+                </select>
+              ) : f.type === "file" ? (
+                <FileUpload
+                  id={`${table}-${f.name}`}
+                  bucket={f.bucket ?? "documents"}
+                  accept={f.accept ?? "application/pdf"}
+                  value={String(form[f.name] ?? "")}
+                  onChange={(v) => setForm({ ...form, [f.name]: v })}
+                />
+              ) : f.type === "checkbox" ? (
+                <input
+                  id={`${table}-${f.name}`}
+                  type="checkbox"
+                  className="h-4 w-4"
+                  checked={Boolean(form[f.name])}
+                  onChange={(e) => setForm({ ...form, [f.name]: e.target.checked })}
+                />
+              ) : (
+                <input
+                  id={`${table}-${f.name}`}
+                  type={f.type === "number" ? "number" : f.type === "date" ? "date" : "text"}
+                  className={fieldClass}
+                  value={String(form[f.name] ?? "")}
+                  onChange={(e) => setForm({ ...form, [f.name]: e.target.value })}
+                />
+              )}
+            </Field>
+          </div>
+        ))}
+        <div className="flex gap-3 sm:col-span-2">
+          <button
+            type="submit"
+            disabled={save.isPending}
+            className="rounded-sm bg-primary px-6 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground disabled:opacity-60"
+          >
+            {save.isPending ? "Saving…" : "Save"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setEditing(null)}
+            className="rounded-sm border border-border px-6 py-2.5 text-xs font-bold uppercase tracking-[0.12em] hover:bg-accent"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    );
+  }
+
   return (
     <section>
       <div className="flex flex-wrap items-end justify-between gap-4">
@@ -158,94 +249,7 @@ export function CrudSection({ config }: { config: CrudConfig }) {
         ) : null}
       </div>
 
-      {editing ? (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            save.mutate();
-          }}
-          className="mt-6 grid gap-5 border border-border bg-card p-6 sm:grid-cols-2"
-        >
-          {fields.map((f) => (
-            <div key={f.name} className={f.type === "textarea" ? "sm:col-span-2" : undefined}>
-              <Field
-                label={f.label}
-                htmlFor={`${table}-${f.name}`}
-                required={f.required}
-                hint={f.hint}
-              >
-                {f.readOnly ? (
-                  <p className="text-sm text-muted-foreground">
-                    {String(form[f.name] ?? "") || "—"}
-                  </p>
-                ) : f.type === "textarea" ? (
-                  <textarea
-                    id={`${table}-${f.name}`}
-                    rows={4}
-                    className={fieldClass}
-                    value={String(form[f.name] ?? "")}
-                    onChange={(e) => setForm({ ...form, [f.name]: e.target.value })}
-                  />
-                ) : f.type === "select" ? (
-                  <select
-                    id={`${table}-${f.name}`}
-                    className={fieldClass}
-                    value={String(form[f.name] ?? "")}
-                    onChange={(e) => setForm({ ...form, [f.name]: e.target.value })}
-                  >
-                    <option value="">Select…</option>
-                    {(f.options ?? []).map((o) => (
-                      <option key={o} value={o}>
-                        {o}
-                      </option>
-                    ))}
-                  </select>
-                ) : f.type === "file" ? (
-                  <FileUpload
-                    id={`${table}-${f.name}`}
-                    bucket={f.bucket ?? "documents"}
-                    accept={f.accept ?? "application/pdf"}
-                    value={String(form[f.name] ?? "")}
-                    onChange={(v) => setForm({ ...form, [f.name]: v })}
-                  />
-                ) : f.type === "checkbox" ? (
-                  <input
-                    id={`${table}-${f.name}`}
-                    type="checkbox"
-                    className="h-4 w-4"
-                    checked={Boolean(form[f.name])}
-                    onChange={(e) => setForm({ ...form, [f.name]: e.target.checked })}
-                  />
-                ) : (
-                  <input
-                    id={`${table}-${f.name}`}
-                    type={f.type === "number" ? "number" : f.type === "date" ? "date" : "text"}
-                    className={fieldClass}
-                    value={String(form[f.name] ?? "")}
-                    onChange={(e) => setForm({ ...form, [f.name]: e.target.value })}
-                  />
-                )}
-              </Field>
-            </div>
-          ))}
-          <div className="flex gap-3 sm:col-span-2">
-            <button
-              type="submit"
-              disabled={save.isPending}
-              className="rounded-sm bg-primary px-6 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-foreground disabled:opacity-60"
-            >
-              {save.isPending ? "Saving…" : "Save"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setEditing(null)}
-              className="rounded-sm border border-border px-6 py-2.5 text-xs font-bold uppercase tracking-[0.12em] hover:bg-accent"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      ) : null}
+      {editing === "new" ? renderEditor("mt-6") : null}
 
       {list.isLoading ? (
         <p className="mt-6 text-sm uppercase tracking-[0.18em] text-muted-foreground">Loading…</p>
@@ -258,33 +262,36 @@ export function CrudSection({ config }: { config: CrudConfig }) {
       ) : (
         <ul className="mt-6 divide-y divide-border border-y border-border">
           {(list.data ?? []).map((row) => (
-            <li key={row.id} className="flex flex-wrap items-center gap-4 py-4">
-              <div className="min-w-0 flex-1">
-                <p className="truncate font-semibold">{String(row[primaryField] ?? "—")}</p>
-                {secondaryField ? (
-                  <p className="truncate text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                    {String(row[secondaryField] ?? "")}
-                  </p>
-                ) : null}
-              </div>
-              <button
-                type="button"
-                onClick={() => startEdit(row)}
-                className="rounded-sm border border-border px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] hover:bg-accent"
-              >
-                Edit
-              </button>
-              {allowDelete ? (
+            <li key={row.id} className="py-4">
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="min-w-0 flex-1">
+                  <p className="truncate font-semibold">{String(row[primaryField] ?? "—")}</p>
+                  {secondaryField ? (
+                    <p className="truncate text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                      {String(row[secondaryField] ?? "")}
+                    </p>
+                  ) : null}
+                </div>
                 <button
                   type="button"
-                  onClick={() => {
-                    if (confirm("Delete this record permanently?")) remove.mutate(row.id);
-                  }}
-                  className="rounded-sm border border-destructive px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-destructive hover:bg-destructive/10"
+                  onClick={() => startEdit(row)}
+                  className="rounded-sm border border-border px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] hover:bg-accent"
                 >
-                  Delete
+                  Edit
                 </button>
-              ) : null}
+                {allowDelete ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (confirm("Delete this record permanently?")) remove.mutate(row.id);
+                    }}
+                    className="rounded-sm border border-destructive px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-destructive hover:bg-destructive/10"
+                  >
+                    Delete
+                  </button>
+                ) : null}
+              </div>
+              {editing === row.id ? renderEditor("mt-4") : null}
             </li>
           ))}
         </ul>
